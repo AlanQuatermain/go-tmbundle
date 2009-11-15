@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+
+TextMate.save_current_document('Go')
+TextMate::Executor.make_project_master_current_document
+
+filepath = ENV["TM_FILEPATH"]
+base = filepath.chomp(File.extname(filepath))
+
+flags = ENV["TM_GO_FLAGS"]
+args = [ENV["TM_CGO"] || '6g', flags, filepath].compact   # remove any odd nils in the args array
+
+if args[0] == '6g'
+  # run the compiler
+  #`#{args.join(' ')}`
+  TextMate::Executor.run(args)
+  # run the linker after the compiler
+  #`6l #{base}.6`
+  TextMate::Executor.run(['6l', base + '.6'])
+  # run the binary after the linker
+  args = [File.join(File.dirname(filepath), '6.out')]
+else
+  # run the compiler
+  `#{args.join(' ')}`
+  # run a.out after the compiler finishes
+  args = File.join(File.dirname(filepath), 'a.out')
+end
+
+TextMate::Executor.run(args)</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
+	<key>name</key>
+	<string>Run</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>0B3C3EB0-9F51-4997-A87D-ECA507D8E31E</string>
+</dict>
+</plist>
