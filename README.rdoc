@@ -19,13 +19,15 @@ At present there are still a couple of odd things to clear up. If anyone can sug
 === Compiling and Running
 The Run() function will run 6g on your source file, then run 6l on the new <name>.6 file, then run the resulting 6.out file. All files will be created in the same folder as the source file. It doesn't do anything about building packages yet-- that's something I'll add later on. In the meantime, to build a package archive (or append new .6 files to an existing package archive) you would use:
 
-> 6g myfile.go
-> gopack rg <archive>.a myfile.6 ...
+  > 6g myfile.go
+  > gopack rg <archive>.a myfile.6 ...
 
-<archive> is the name for your archive file, and you can specify multiple .6 files to be appended to that archive. So for instance:
++<archive>+ is the name for your archive file, and you can specify multiple +.6+ files to be appended to that archive. So for instance:
 
-> 6g my_io.go my_file.go my_echo.go my_cat.go
-> gopack rg my_stuff.a my_io.6 my_file.6 my_echo.6 my_cat.6
+  > 6g my_io.go my_file.go my_echo.go my_cat.go
+  > gopack rg my_stuff.a my_io.6 my_file.6 my_echo.6 my_cat.6
+
+This creates or updates an output file named +my_stuff.a+.
 
 === Contact Information
 
