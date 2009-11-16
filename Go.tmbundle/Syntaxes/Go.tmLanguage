@@ -50,7 +50,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32|64)?|b(yte|ool))\b</string>
+			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32|64)?|b(yte|ool)|string)\b</string>
 			<key>name</key>
 			<string>storage.type.go</string>
 		</dict>
