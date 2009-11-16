@@ -1,0 +1,34 @@
+= Go
+(a TextMate language bundle)
+
+=== Features
+The bundle here implements a language syntax, some snippets, and a 'Run' command for the Go language (http://golang.org).
+
+At present there are still a couple of odd things to clear up. If anyone can suggest how to change the Run script to stop after any errors compiling or linking, and to not output empty blocks for those steps if all went well, I would be very grateful.
+
+=== Snippets
++imp+::    sets up an import statement with optional alternative name.
++func+::   creates a function declaration with tab-stops for name, parameters, and return types.
++tfunc+::  creates a function as 'func' but adds the variable declaration needed to attach the function to a type (like a class method).
++type+::   initializes a type declaration for you, with name and variable type as tab-stops.
++struct+:: lays out a structure declaration (use 'type' first to name your structure) with a tab stop on a sample member variable.
++main+::   creates a plain 'main()' function for you.
++for+::    lays out a standard for loop, with tab stops for count, variable name, and loop-end action.
++if+::     lays out a plain if statement, with curly braces, tab stop on the condition. This is here because an if in Go MUST use braces it seems, and this is as good a way as any to force myself (and others) to remember that.
+
+=== Compiling and Running
+The Run() function will run 6g on your source file, then run 6l on the new <name>.6 file, then run the resulting 6.out file. All files will be created in the same folder as the source file. It doesn't do anything about building packages yet-- that's something I'll add later on. In the meantime, to build a package archive (or append new .6 files to an existing package archive) you would use:
+
+> 6g myfile.go
+> gopack rg <archive>.a myfile.6 ...
+
+<archive> is the name for your archive file, and you can specify multiple .6 files to be appended to that archive. So for instance:
+
+> 6g my_io.go my_file.go my_echo.go my_cat.go
+> gopack rg my_stuff.a my_io.6 my_file.6 my_echo.6 my_cat.6
+
+=== Contact Information
+
+You can contact me through github, or you can ping me on Twitter as 'alanQuatermain'.
+
+Happy coding :)

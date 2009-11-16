@@ -1,0 +1,13 @@
+=== 0.2.0 / 2009-11-15
+* New indentation increase/decrease rules:
+  * Case statements decrease and increase (they pop their own line back by one indent without affecting either prior or following line).
+  * Regular braces now increase/decrease indent automatically.
+* Regular braces now act as folding markers for multi-line 'const ( ... )' declarations.
+* Code-folding matches on curly braces are now more conservative-- before, they could match characters beyond newlines.
+* Built-in storage types are now matched properly.
+* Variable initialization is FINALLY matching correctly. Should work for every style & number of variables, even in-line in loop statements.
+* Matches exported variable names correctly (i.e. those beginning with an uppercase letter).
+* Dot-accessed variable match no longer consumes the preceding '.' character.
+ 
+=== 0.1.0 / 2009-11-14
+* Initial Revision
