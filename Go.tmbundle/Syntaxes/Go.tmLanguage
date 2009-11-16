@@ -44,13 +44,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(break|case|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|map|package|range|return|select|struct|switch|type|var)\b</string>
+			<string>\b(s(truct|elect|witch)|c(ontinue|ase)|type|i(f|mport)|def(er|ault)|package|else|var|f(or|unc|allthrough)|r(eturn|ange)|go(to)?|map|break)\b</string>
 			<key>name</key>
 			<string>keyword.control.go</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32)?|loat64|byte)\b</string>
+			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32|64)?|byte)\b</string>
 			<key>name</key>
 			<string>storage.type.go</string>
 		</dict>
@@ -71,6 +71,27 @@
 			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b</string>
 			<key>name</key>
 			<string>constant.numeric.go</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.go</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.exported-variable.go</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>This is kinda hacky, in order to get the 'var' coloured the right way again.</string>
+			<key>match</key>
+			<string>^\s*(?:(var)\s+)?([A-Z][[:alnum:]_]*)</string>
+			<key>name</key>
+			<string>meta.exported-variable-declaration.go</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -202,12 +223,6 @@
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(?&lt;![{(])^\s*(?:(?:var\s+)|(?=\b:=\b.*$))([:upper:][[:alnum:]_])</string>
-			<key>name</key>
-			<string>meta.exported-variable.go</string>
-		</dict>
-		<dict>
 			<key>include</key>
 			<string>#block</string>
 		</dict>
@@ -279,7 +294,7 @@
 		<key>access</key>
 		<dict>
 			<key>match</key>
-			<string>\.([[:alpha:]_][[:alnum:]_]*)\b(?!\s*\()</string>
+			<string>(?&lt;=\.)[[:alpha:]_][[:alnum:]_]*\b(?!\s*\()</string>
 			<key>name</key>
 			<string>variable.other.dot-access.go</string>
 		</dict>

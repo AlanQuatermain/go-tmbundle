@@ -17,9 +17,9 @@
 	           (                     # capture:
 	             [^}{"']* \{        # anything other than curly braces or quotes, then open curly
 	           )?                    # (optional)
-	           [;\s]*                # any whitespace or semicolons
+	           [;\s]*?               # any whitespace or semicolons
 	         |
-                (?: case \b \w+ :\s*) # case statements pop back one indent
+                (?: \s* case \b .+ :\s*)	# case statements pop back one indent
               |
                 (?: \) (?&lt;! \( ) )    # closing braces not preceded by opening braces
              )
@@ -31,11 +31,11 @@
 	    ^ 
           (?: .* \*/ )?				# skip any comments
           (?:
-           (.* \{ [^}"']*)          # lines containing an open curly but no quotes or close curly
+           (.* \{ [^}"'\n]*)         # lines containing an open curly but no quotes or close curly
            |						# OR
-           (\s* case \b \w+ : \s*)   # case statements
+           (?:\s* case \b .+ :\s*)   # case statements
            |                         # OR
-           (.* \( [^)"']*)          # lines containing an open brace but no quotes or close brace
+           (.* \( [^)"'\n]*)          # lines containing an open brace but no quotes or close brace
           )
 	     (//.*|/\*.*\*/\s*)?        # skip any comments (optional)
          $
