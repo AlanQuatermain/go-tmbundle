@@ -539,7 +539,7 @@
                         ((-?\d+)|\*(-?\d+\$)?)?                     # minimum field width
                         (\.((-?\d+)|\*(-?\d+\$)?)?)?                # precision
                         (hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)?        # length modifier
-                        [diouxXDOUeEfFgGaAcCsSpn%]                  # conversion type
+                        [diouxXDOUeEfFgGaAcCsSpnv%]                  # conversion type
                     </string>
 					<key>name</key>
 					<string>constant.other.placeholder.go</string>
