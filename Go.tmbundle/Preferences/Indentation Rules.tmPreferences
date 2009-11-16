@@ -11,18 +11,34 @@
 		<key>decreaseIndentPattern</key>
 		<string>(?x)
 	    ^                            # start of line
-	        (.*\*/)?                 # capture: anything followed by */ (optional)
-	            \s* \}               # then whitespace and a closing curly brace
-	        (                        # capture:
-	            [^}{"']* \{         # anything other than curly braces or quotes, then open curly
-	        )?                       # (optional)
-	        [;\s]*                   # any whitespace or semicolons
-	        (//.*|/\*.*\*/\s*)?      # capture: comments (optional)
+	        (.*\*/)?                 # skip comments if present
+             (					# three possibilities
+	           \s* \}                # whitespace and a closing curly brace
+	           (                     # capture:
+	             [^}{"']* \{        # anything other than curly braces or quotes, then open curly
+	           )?                    # (optional)
+	           [;\s]*                # any whitespace or semicolons
+	         |
+                (?: case \b \w+ :\s*) # case statements pop back one indent
+              |
+                (?: \) (?&lt;! \( ) )    # closing braces not preceded by opening braces
+             )
+	        (//.*|/\*.*\*/\s*)?      # skip any comments (optional)
 	    $                            # end of line
 	</string>
 		<key>increaseIndentPattern</key>
 		<string>(?x)
-	    ^ .* \{ [^}"']* $           # lines containing an open curly but no quotes or close curly
+	    ^ 
+          (?: .* \*/ )?				# skip any comments
+          (?:
+           (.* \{ [^}"']*)          # lines containing an open curly but no quotes or close curly
+           |						# OR
+           (\s* case \b \w+ : \s*)   # case statements
+           |                         # OR
+           (.* \( [^)"']*)          # lines containing an open brace but no quotes or close brace
+          )
+	     (//.*|/\*.*\*/\s*)?        # skip any comments (optional)
+         $
 	</string>
 		<key>indentNextLinePattern</key>
 		<string>(?x)^

@@ -12,11 +12,26 @@
 	<string>-[*]-( Mode:)? C -[*]-</string>
 	<key>foldingStartMarker</key>
 	<string>(?x)
-    	 /\*\*(?!\*)
-    	|^(?![^{]*?//|[^{]*?/\*(?!.*?\*/.*?\{)).*?\{\s*($|//|/\*(?!.*?\*/.*\S))
+          /\*\*(?!\*)                           # opening C-style comment with 2 asterisks but no third later on
+         |                                      # OR
+          ^                                     # start of line...
+           (?!                                  # ...which does NOT contain...
+              [^{(]*?//                         #    ...a possible bunch of non-opening-braces, followed by a C++ comment
+             |                                  #    OR
+              [^{(]*?/\*(?!.*?\*/.*?[{(])       #    ...a possible bunch of non-opening-braces, followed by a C comment with no ending
+           )
+           .*?                                  # ...any characters (or none)...
+           [{(]\s*                              # ...followed by an open brace and zero or more whitespace...
+           (                                    # ...followed by...
+            $                                   #    ...a dollar...
+             |                                  #    OR
+            //                                  #    ...a C++ comment...
+             |                                  #    OR
+            /\*(?!.*?\*/.*\S)                   #    ...a C comment, so long as no non-whitespace chars follow it..
+           )
     </string>
 	<key>foldingStopMarker</key>
-	<string>(?&lt;!\*)\*\*/|^\s*\}</string>
+	<string>(?&lt;!\*)\*\*/|^\s*[})]</string>
 	<key>keyEquivalent</key>
 	<string>^~G</string>
 	<key>name</key>
@@ -32,6 +47,12 @@
 			<string>\b(break|case|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|map|package|range|return|select|struct|switch|type|var)\b</string>
 			<key>name</key>
 			<string>keyword.control.go</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32)?|loat64|byte)\b</string>
+			<key>name</key>
+			<string>storage.type.go</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -258,9 +279,9 @@
 		<key>access</key>
 		<dict>
 			<key>match</key>
-			<string>\.[[:alpha:]_][[:alnum:]_]*\b(?!\s*\()</string>
+			<string>\.([[:alpha:]_][[:alnum:]_]*)\b(?!\s*\()</string>
 			<key>name</key>
-			<string>variable.other.dot-acces.go</string>
+			<string>variable.other.dot-access.go</string>
 		</dict>
 		<key>block</key>
 		<dict>
@@ -301,7 +322,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\s*)\b(c(ap|lose(d)?)|len|make|new|p(anic(ln)?|rint(ln)?))(?:\b|\()</string>
+					<string>(\s*)\b(new|c(lose(d)?|ap)|p(anic(ln)?|rint(ln)?)|len|make)(?:\b|\()</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -345,22 +366,25 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
 							<string>punctuation.definition.parameters.go</string>
 						</dict>
 					</dict>
 					<key>match</key>
 					<string>(?x)
-                        (?x)
-                        (?:
-                            (?: (?= \s ) (?:(?:(?&lt;=var)\s+) | (?= := )) )       # optional var + space before name, or colon-equals later
-                        )
-                        (
-                            (?:[[:alpha:]_][[:alnum:]_]*+(?:,\b)?)*+            # variable name(s) separated by optional comma-wordbreak
-                        )
-                        \s*(\()?
-                    </string>
+(?: (?:(?:(?:var))|((?:\w+,\s+)*(?=\w+\s+:=))) )       # var+space or assign op
+\s*
+(
+  (?:([[:alpha:]_][[:alnum:]_]*+)(?:,\s+)?)+            # variable name(s)
+)
+\s*(\()?
+                       </string>
 					<key>name</key>
-					<string>meta.initialization.c</string>
+					<string>meta.initialization.go</string>
 				</dict>
 				<dict>
 					<key>include</key>
