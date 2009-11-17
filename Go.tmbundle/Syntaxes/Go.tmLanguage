@@ -376,7 +376,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>variable.other.go</string>
+							<string>keyword.control.go</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -386,15 +386,20 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
 							<string>punctuation.definition.parameters.go</string>
 						</dict>
 					</dict>
 					<key>match</key>
 					<string>(?x)
-(?: (?:(?:(?:var))|((?:\w+,\s+)*(?=\w+\s+:=))) )       # var+space or assign op
+(?: (?:(?:(var))|((?:\w+,\s+)*(?=\w+\s+:=))) )       # var+space or assign op
 \s*
 (
-  (?:([[:alpha:]_][[:alnum:]_]*+)(?:,\s+)?)+            # variable name(s)
+  (?:([[:alpha:]_][[:alnum:]_]*+)(?:,\s+)?)++            # variable name(s)
 )
 \s*(\()?
                        </string>
