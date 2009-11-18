@@ -1,3 +1,14 @@
+=== 1.0.0 / 2009-11-18
+* Updated grammar, now uses much fewer backrefs and suchlike, meaning it no longer causes TextMate to hog all your CPU!
+* Grammar now correctly identifies and separately scopes just about everything I've been able to find, including:
+  * Function names, receivers, parameters, and return types.
+  * Variable initializations, whether by short or long form (including the := operator).
+  * Exported variables.
+  * Channel I/O operators.
+* Snippets now obey standard Go formatting rules (even though they insist on icky K&R stuff, doh).
+* New command: Tidy. Runs 'gofmt' to reformat your code based on standard Go formatting guidelines. This has the useful side-effect of performing a syntax check on the file, so you can also use it as pre-compilation check.
+* Regular braces () now open up in the same manner as curly braces {} if you press Enter with the cursor between an empty pair.
+
 === 0.2.0 / 2009-11-15
 * New indentation increase/decrease rules:
   * Case statements decrease and increase (they pop their own line back by one indent without affecting either prior or following line).
