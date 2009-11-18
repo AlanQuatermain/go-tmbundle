@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>import ${2:altname }"${1:name}"</string>
+	<string>import $2"${1:name}"</string>
 	<key>name</key>
 	<string>Import</string>
 	<key>scope</key>

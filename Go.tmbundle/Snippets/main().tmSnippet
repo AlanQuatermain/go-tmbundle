@@ -3,9 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>func main()
-{
-	${0:// code}
+	<string>func main() {
+	$0
 }</string>
 	<key>name</key>
 	<string>main()</string>

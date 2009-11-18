@@ -3,9 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>struct
-{
-	${0:var vartype};
+	<string>struct {
+	${0:var vartype;}
 }</string>
 	<key>name</key>
 	<string>Struct</string>

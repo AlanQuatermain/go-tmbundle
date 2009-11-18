@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>for ${2:i} := 0; $2 &lt; ${1:count}; ${3:$2++} {
+	<string>
 	$0
-}</string>
+</string>
+	<key>keyEquivalent</key>
+	<string></string>
 	<key>name</key>
-	<string>For Loop</string>
+	<string>Empty ()</string>
 	<key>scope</key>
-	<string>source.go</string>
-	<key>tabTrigger</key>
-	<string>for</string>
+	<string>meta.parens.empty.go</string>
 	<key>uuid</key>
-	<string>7DA0072A-BF35-413B-B4D9-B5C2B4D20FF2</string>
+	<string>214A69FB-0168-465E-AB51-D8C6C46BCF61</string>
 </dict>
 </plist>

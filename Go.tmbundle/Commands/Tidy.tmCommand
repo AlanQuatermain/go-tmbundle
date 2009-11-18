@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>if [[ "$TM_SOFT_TABS" = "YES" ]];
+	then export GOFMT_SPACES="-spaces"
+fi
+
+result=`gofmt ${GOFMT_SPACES} -tabwidth=${TM_TAB_SIZE} ${TM_FILEPATH} 2&gt;&amp;1`
+if [[ $? &gt; 0 ]];
+	then exit_show_tool_tip "Errors: $result"
+	else echo "$result"
+fi</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^H</string>
+	<key>name</key>
+	<string>Tidy</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>B0271A46-F6EF-4D2F-95A6-EC067E69155C</string>
+</dict>
+</plist>
