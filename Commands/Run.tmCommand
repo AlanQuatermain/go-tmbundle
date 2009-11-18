@@ -9,6 +9,10 @@
 
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/require_cmd"
+
+TextMate.require_cmd '6g'
+TextMate.require_cmd '6l'
 
 TextMate.save_current_document('Go')
 TextMate::Executor.make_project_master_current_document

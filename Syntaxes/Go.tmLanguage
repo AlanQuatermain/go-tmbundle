@@ -9,7 +9,7 @@
 		<string>go</string>
 	</array>
 	<key>firstLineMatch</key>
-	<string>-[*]-( Mode:)? C -[*]-</string>
+	<string>-[*]-( Mode:)? Go -[*]-</string>
 	<key>foldingStartMarker</key>
 	<string>(?x)
           /\*\*(?!\*)                           # opening C-style comment with 2 asterisks but no third later on
@@ -56,8 +56,8 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*package\b\s+</string>
-			<key>captures</key>
+			<string>^[[:blank:]]*(import)\b\s+</string>
+			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
@@ -68,7 +68,7 @@
 			<key>end</key>
 			<string>(?=(?://|/\*))|$</string>
 			<key>name</key>
-			<string>meta.preprocessor.go.package</string>
+			<string>meta.preprocessor.go.import</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -207,13 +207,13 @@
 					<key>end</key>
 					<string>\*/</string>
 					<key>name</key>
-					<string>comment.block.c</string>
+					<string>comment.block.go</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\*/.*\n</string>
 					<key>name</key>
-					<string>invalid.illegal.stray-commend-end.c</string>
+					<string>invalid.illegal.stray-commend-end.go</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -227,7 +227,7 @@
 					<key>match</key>
 					<string>^// =(\s*.*?)\s*=\s*$\n?</string>
 					<key>name</key>
-					<string>comment.line.banner.go</string>
+					<string>comment.line.double-slash.banner.go</string>
 				</dict>
 				<dict>
 					<key>begin</key>
