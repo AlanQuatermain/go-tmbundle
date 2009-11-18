@@ -1,10 +1,7 @@
-= IMPORTANT:
-==== This repository is moving to http://github.com/AlanQuatermain/go-tmbundle
-
-The code in this repository will not be updated from version 1.0. The new repository will have the bundle as its root folder, for easier installation.
-
 == Go
 (a TextMate language bundle)
+
+==== This project has been modified a little since it was first published. The original repository (no longer updated) is available at http://github.com/AlanQuatermain/old-go-tmbundle
 
 === Features
 The bundle here implements a language syntax, some snippets, and a 'Run' command for the Go language (http://golang.org).
