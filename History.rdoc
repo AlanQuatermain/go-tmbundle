@@ -1,3 +1,8 @@
+=== 1.0.1 / 2009-11-19
+* Fixed a couple of bugs in the language grammar.
+* Cleaned up menu formatting.
+* Commands will now complain correctly if the necessary command-line tools aren't available.
+
 === 1.0.0 / 2009-11-18
 * Updated grammar, now uses much fewer backrefs and suchlike, meaning it no longer causes TextMate to hog all your CPU!
 * Grammar now correctly identifies and separately scopes just about everything I've been able to find, including:

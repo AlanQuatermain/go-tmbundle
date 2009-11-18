@@ -31,6 +31,9 @@ The Run() function will run 6g on your source file, then run 6l on the new <name
 
 This creates or updates an output file named +my_stuff.a+.
 
+=== Thanks
+Thanks be to lasersox and Infininight over at the #textmate room on IRC (irc://irc.freenode.net/textmate) for all their help in cleaning up this here bundle, and for helping me to optimize my regex use in the language grammar.
+
 === Contact Information
 
 You can contact me through github, or you can ping me on Twitter as 'alanQuatermain'.
