@@ -40,144 +40,19 @@
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#comments</string>
+			<string>#receiver_function_declaration</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\b(s(truct|elect|witch)|c(ontinue|ase)|type|i(f|mport)|def(er|ault)|package|else|var|f(or|unc|allthrough)|r(eturn|ange)|go(to)?|map|break)\b</string>
-			<key>name</key>
-			<string>keyword.control.go</string>
+			<key>include</key>
+			<string>#plain_function_declaration</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32|64)?|b(yte|ool)|string)\b</string>
-			<key>name</key>
-			<string>storage.type.go</string>
+			<key>include</key>
+			<string>#basic_things</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\b(const|chan)\b</string>
-			<key>name</key>
-			<string>storage.modifier.go</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(nil|true|false|iota)\b</string>
-			<key>name</key>
-			<string>constant.language.go</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b</string>
-			<key>name</key>
-			<string>constant.numeric.go</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.go</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>meta.exported-variable.go</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>This is kinda hacky, in order to get the 'var' coloured the right way again.</string>
-			<key>match</key>
-			<string>^\s*(?:(var)\s+)?([A-Z][[:alnum:]_]*)</string>
-			<key>name</key>
-			<string>meta.exported-variable-declaration.go</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>"</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.go</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>"</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.go</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.double.go</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#string_placeholder</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>'</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.go</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>'</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.go</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.single.go</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#string_escaped_char</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>`</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.go</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>`</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.go</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.raw.go</string>
+			<key>include</key>
+			<string>#exported_variables</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -227,66 +102,12 @@
 			<string>#block</string>
 		</dict>
 		<dict>
-			<key>begin</key>
-			<string>(?x)
-                (?:  ^ | (?: (?= \s ) (?&lt;!else|new|return) (?&lt;=\w)))        # allow newline or word + space before func keyword
-                (func)                                                      # Capture 1: func keyword begins all function definitions
-                (?:\s*)([[:alpha:]_]+[[:alnum:]_]*\s*)?\(                   # Capture 2: name of function, optional, required opening brace
-                ( (?: [[:alpha:]_]+ [[:alnum:]_]* \s? )* )?                 # Capture 3: parameter list, optional
-                \)                                                          # required closing brace
-                \s*
-                (\(?
-                    [[:alpha:]_]+[[:alnum:]_]*\s
-                \)?)?                                                       # Capture 4: optional results, in optional braces
-            </string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.function.go</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.function.go</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.go</string>
-				</dict>
-				<key>4</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.return-types.go</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(?&lt;=\})|(;)</string>
-			<key>name</key>
-			<string>meta.function.go</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#parens</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(const|chan)\b</string>
-					<key>name</key>
-					<string>storage.modifier.go</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#block</string>
-				</dict>
-			</array>
+			<key>include</key>
+			<string>#root_parens</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#function_calls</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -297,6 +118,32 @@
 			<string>(?&lt;=\.)[[:alpha:]_][[:alnum:]_]*\b(?!\s*\()</string>
 			<key>name</key>
 			<string>variable.other.dot-access.go</string>
+		</dict>
+		<key>basic_things</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#initializers</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#access</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#strings</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords</string>
+				</dict>
+			</array>
 		</dict>
 		<key>block</key>
 		<dict>
@@ -320,99 +167,11 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#access</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.whitespace.support.function.leading.go</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.builtin.go</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(\s*)\b(new|c(lose(d)?|ap)|p(anic(ln)?|rint(ln)?)|len|make)(?:\b|\()</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.whitespace.function-call.leading.go</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.any-method.go</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.go</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(?x)
-                        (?: (?= \s ) (?:(?&lt;=else|new|return) | (?&lt;!\w)) (\s+) )?
-                        (\b
-                            (?!(for|if|else|switch|return)\s*\()
-                            (?:[[:alpha:]_][[:alnum:]_]*+\b)            # method name
-                        )
-                        \s*(\()
-                    </string>
-					<key>name</key>
-					<string>meta.function-call.go</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.go</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.go</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(?x)
-(?: (?:(?:(var))|((?:\w+,\s+)*(?=\w+\s+:=))) )       # var+space or assign op
-\s*
-(
-  (?:([[:alpha:]_][[:alnum:]_]*+)(?:,\s+)?)++            # variable name(s)
-)
-\s*(\()?
-                       </string>
-					<key>name</key>
-					<string>meta.initialization.go</string>
+					<string>#function_block_innards</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#block</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$base</string>
+					<string>#exported_variables</string>
 				</dict>
 			</array>
 		</dict>
@@ -497,7 +256,29 @@
 				</dict>
 			</array>
 		</dict>
-		<key>parens</key>
+		<key>exported_variables</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.go</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.exported.go</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>This is kinda hacky, in order to get the 'var' scoped the right way again.</string>
+			<key>match</key>
+			<string>^\s*(?:(var)\s+)?([[:upper:]][[:alnum:]_]*)</string>
+			<key>name</key>
+			<string>meta.exported-variable-declaration.go</string>
+		</dict>
+		<key>fn_parens</key>
 		<dict>
 			<key>begin</key>
 			<string>\(</string>
@@ -509,7 +290,347 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>$base</string>
+					<string>#basic_things</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_calls</string>
+				</dict>
+			</array>
+		</dict>
+		<key>function_block</key>
+		<dict>
+			<key>begin</key>
+			<string>\{</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>name</key>
+			<string>meta.block.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#function_block_innards</string>
+				</dict>
+			</array>
+		</dict>
+		<key>function_block_innards</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#basic_things</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.support.function.leading.go</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.builtin.go</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\s*)\b(new|c(lose(d)?|ap)|p(anic(ln)?|rint(ln)?)|len|make)(?:\b|\()</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_block</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_calls</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#fn_parens</string>
+				</dict>
+			</array>
+		</dict>
+		<key>function_calls</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.whitespace.function-call.leading.go</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.any-method.go</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.go</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?x)
+                (?: (?= \s ) (?:(?&lt;=else|new|return) | (?&lt;!\w)) (\s+) )?
+                (\b
+                    (?!(for|if|else|switch|return)\s*\()
+                    (?:[[:alpha:]_][[:alnum:]_]*+\b)            # method name
+                )
+                \s*(\()
+            </string>
+			<key>name</key>
+			<string>meta.function-call.go</string>
+		</dict>
+		<key>initializers</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.go</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>This matches the 'var x int = 0' style of variable declaration.</string>
+					<key>match</key>
+					<string>^[[:blank:]]*(var)(?:\s+([[:alpha:]_][[:alnum:]_]*[,[:blank:]]*(?:[[:alpha:]_][[:alnum:]_]*)*))</string>
+					<key>name</key>
+					<string>meta.initialization.explicit.go</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.initialize.go</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>This matches the 'x := 0' style of variable declaration.</string>
+					<key>match</key>
+					<string>([[:alpha:]_][[:alnum:]_]*,[[:blank:]]*)*([[:alpha:]_][[:alnum:]_]*)\s*(:=)</string>
+					<key>name</key>
+					<string>meta.initialization.short.go</string>
+				</dict>
+			</array>
+		</dict>
+		<key>keywords</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(s(truct|elect|witch)|c(ontinue|ase)|type|i(nterface|f|mport)|def(er|ault)|package|else|var|f(or|unc|allthrough)|r(eturn|ange)|go(to)?|map|break)\b</string>
+					<key>name</key>
+					<string>keyword.control.go</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|ptr|64)?|float(32|64)?|b(yte|ool)|string)\b</string>
+					<key>name</key>
+					<string>storage.type.go</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(const|chan)\b</string>
+					<key>name</key>
+					<string>storage.modifier.go</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(nil|true|false|iota)\b</string>
+					<key>name</key>
+					<string>constant.language.go</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b</string>
+					<key>name</key>
+					<string>constant.numeric.go</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\&lt;\-)|(\-\&gt;)</string>
+					<key>name</key>
+					<string>support.channel-operator.go</string>
+				</dict>
+			</array>
+		</dict>
+		<key>plain_function_declaration</key>
+		<dict>
+			<key>begin</key>
+			<string>(?x)
+    	            (func)\s*
+    	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
+    	            (?: \( ([\[\]\w\d\s,._*&amp;]*)? \) )               # required braces for parameters (even if empty)
+    	            \s*
+    	            (?: \(? ([\[\]\w\d\s,._*&amp;]*) \)? )?             # optional return types, optionally within braces
+    	    </string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.go</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.go</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameters.go</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.return-types.go</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(?&lt;=\})</string>
+			<key>name</key>
+			<string>meta.function.plain.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#storage_type</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#storage_modifier</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_block</string>
+				</dict>
+			</array>
+		</dict>
+		<key>receiver_function_declaration</key>
+		<dict>
+			<key>begin</key>
+			<string>(?x)
+    	            (func)\s*
+    	            (?: \( ([\[\]\d\w\s,._*&amp;]*) \)\s+ )                # receiver variable declarations, in brackets
+    	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
+    	            (?: \( ([\[\]\d\w\s,._*&amp;]*)? \) )               # required braces for parameters (even if empty)
+    	            \s*
+    	            (?: \(? ([\[\]\d\w\s,._*&amp;]*) \)? )?             # optional return types, optionally within braces
+    	    </string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.go</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.receiver.go</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.go</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameters.go</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>variable.return-types.go</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Version of above with support for declaring a receiver variable.</string>
+			<key>end</key>
+			<string>(?&lt;=\})</string>
+			<key>name</key>
+			<string>meta.function.receiver.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#storage_type</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#storage_modifier</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_block</string>
+				</dict>
+			</array>
+		</dict>
+		<key>root_parens</key>
+		<dict>
+			<key>begin</key>
+			<string>\(</string>
+			<key>end</key>
+			<string>(?&lt;=\()(\))?|(?:\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.parens.empty.go</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.parens.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#basic_things</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#exported_variables</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_calls</string>
 				</dict>
 			</array>
 		</dict>
@@ -553,6 +674,106 @@
 					<string>%</string>
 					<key>name</key>
 					<string>invalid.illegal.placeholder.go</string>
+				</dict>
+			</array>
+		</dict>
+		<key>strings</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>"</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.go</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>"</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.go</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string_escaped_char</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>'</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.go</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>'</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.go</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_placeholder</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string_escaped_char</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>`</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.go</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>`</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.go</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.raw.go</string>
 				</dict>
 			</array>
 		</dict>
