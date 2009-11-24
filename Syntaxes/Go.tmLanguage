@@ -486,9 +486,9 @@
 			<string>(?x)
     	            (func)\s*
     	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
-    	            (?: \( ([\[\]\w\d\s,._*&amp;]*)? \) )               # required braces for parameters (even if empty)
+    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )               # required braces for parameters (even if empty)
     	            \s*
-    	            (?: \(? ([\[\]\w\d\s,._*&amp;]*) \)? )?             # optional return types, optionally within braces
+    	            (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
     	    </string>
 			<key>beginCaptures</key>
 			<dict>
@@ -542,11 +542,11 @@
 			<key>begin</key>
 			<string>(?x)
     	            (func)\s*
-    	            (?: \( ([\[\]\d\w\s,._*&amp;]*) \)\s+ )                # receiver variable declarations, in brackets
+    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)\s+ )                # receiver variable declarations, in brackets
     	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
-    	            (?: \( ([\[\]\d\w\s,._*&amp;]*)? \) )               # required braces for parameters (even if empty)
+    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )               # required braces for parameters (even if empty)
     	            \s*
-    	            (?: \(? ([\[\]\d\w\s,._*&amp;]*) \)? )?             # optional return types, optionally within braces
+    	            (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
     	    </string>
 			<key>beginCaptures</key>
 			<dict>

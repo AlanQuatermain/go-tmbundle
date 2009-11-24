@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>if [[ "$TM_SOFT_TABS" = "YES" ]];
 	then export GOFMT_SPACES="-spaces"
@@ -17,13 +17,13 @@ if [[ $? &gt; 0 ]];
 	else echo "$result"
 fi</string>
 	<key>input</key>
-	<string>selection</string>
+	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>^H</string>
 	<key>name</key>
 	<string>Tidy</string>
 	<key>output</key>
-	<string>replaceSelectedText</string>
+	<string>replaceDocument</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>

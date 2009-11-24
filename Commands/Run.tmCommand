@@ -9,36 +9,11 @@
 
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
-require ENV["TM_SUPPORT_PATH"] + "/lib/tm/require_cmd"
 
-TextMate.require_cmd '6g'
-TextMate.require_cmd '6l'
-
-TextMate.save_current_document('Go')
+TextMate.save_current_document('go')
 TextMate::Executor.make_project_master_current_document
 
-filepath = ENV["TM_FILEPATH"]
-base = filepath.chomp(File.extname(filepath))
-
-flags = ENV["TM_GO_FLAGS"]
-args = [ENV["TM_CGO"] || '6g', flags, filepath].compact   # remove any odd nils in the args array
-
-if args[0] == '6g'
-  # run the compiler
-  #`#{args.join(' ')}`
-  TextMate::Executor.run(args)
-  # run the linker after the compiler
-  #`6l #{base}.6`
-  TextMate::Executor.run(['6l', base + '.6'])
-  # run the binary after the linker
-  args = [File.join(File.dirname(filepath), '6.out')]
-else
-  # run the compiler
-  `#{args.join(' ')}`
-  # run a.out after the compiler finishes
-  args = File.join(File.dirname(filepath), 'a.out')
-end
-
+args = [ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb', ENV['TM_FILEPATH']]
 TextMate::Executor.run(args)</string>
 	<key>input</key>
 	<string>document</string>

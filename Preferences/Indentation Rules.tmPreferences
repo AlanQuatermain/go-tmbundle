@@ -19,7 +19,7 @@
 	           )?                    # (optional)
 	           [;\s]*?               # any whitespace or semicolons
 	         |
-                (?: \s* case \b .+ :\s*)	# case statements pop back one indent
+                (?:\s* (case|default).*:)	# case statements pop back one indent
               |
                 (?: \) (?&lt;! \( ) )    # closing braces not preceded by opening braces
              )
@@ -31,13 +31,13 @@
 	    ^ 
           (?: .* \*/ )?				# skip any comments
           (?:
-           (.* \{ [^}"'\n]*)         # lines containing an open curly but no quotes or close curly
+           (.* \{ [^}"'\n]*)		# lines containing an open curly but no quotes or close curly
            |						# OR
-           (?:\s* case \b .+ :\s*)   # case statements
-           |                         # OR
-           (.* \( [^)"'\n]*)          # lines containing an open brace but no quotes or close brace
+           (?:\s* (case|default).*:)	# case statements
+           |						# OR
+           (.* \( [^)"'\n]*)		# lines containing an open brace but no quotes or close brace
           )
-	     (//.*|/\*.*\*/\s*)?        # skip any comments (optional)
+	     (//.*|/\*.*\*/\s*)?		# skip any comments (optional)
          $
 	</string>
 		<key>indentNextLinePattern</key>
