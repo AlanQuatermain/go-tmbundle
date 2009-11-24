@@ -23,7 +23,8 @@ opts = GetoptLong.new(
   ['--compiler-prefix', '-p', GetoptLong::REQUIRED_ARGUMENT],
   ['--debug', '-d', GetoptLong::NO_ARGUMENT],
   ['--cflags', '-c', GetoptLong::REQUIRED_ARGUMENT],
-  ['--lflags', '-l', GetoptLong::REQUIRED_ARGUMENT]
+  ['--lflags', '-l', GetoptLong::REQUIRED_ARGUMENT],
+  ['--version', '-v', GetoptLong::NO_ARGUMENT]
 )
 
 opts.each do |opt, arg|
@@ -40,6 +41,9 @@ opts.each do |opt, arg|
     cflags = arg.split(' ')
   when '--lflags'
     lflags = arg.split(' ')
+  when '--version'
+    print "Version 1.0.0"
+    exit 0
   end
 end
 
