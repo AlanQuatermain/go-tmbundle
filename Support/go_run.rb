@@ -2,6 +2,7 @@
 
 require 'open3'
 require 'fileutils'
+require 'getoptlong'
 include FileUtils::Verbose
 
 require ENV['TM_SUPPORT_PATH'] + "/lib/exit_codes"
@@ -9,34 +10,40 @@ require ENV['TM_SUPPORT_PATH'] + "/lib/escape"
 
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/require_cmd"
 
-Debug = false
-
-machine = `sysctl hw.machine | awk -F" " '{print $2}'`
-is64Bit = `sysctl hw.optional.x86_64 | awk -F" " '{print $2}'`
-
+debug = false
+use_gcc = false
 compiler = '6g'
 linker = '6l'
 binext = '6'
+cflags = []
+lflags = []
 
-use_gcc = (ENV['TM_GO_USE_GCC'] == '1')
-if use_gcc
-  compiler = 'gcc'
-else
-  case machine
-  when 'arm'
-    compiler = '5g'
-    linker = '5l'
-    binext = '5'
-  when 'i386'
-    if is64Bit == 0
-      compiler = '8g'
-      linker = '8l'
-      binext = '8'
-    end
+opts = GetoptLong.new(
+  ['--use-gcc', '-g', GetoptLong::NO_ARGUMENT],
+  ['--compiler-prefix', '-p', GetoptLong::REQUIRED_ARGUMENT],
+  ['--debug', '-d', GetoptLong::NO_ARGUMENT],
+  ['--cflags', '-c', GetoptLong::REQUIRED_ARGUMENT],
+  ['--lflags', '-l', GetoptLong::REQUIRED_ARGUMENT]
+)
+
+opts.each do |opt, arg|
+  case opt
+  when '--use-gcc'
+    use_gcc = true
+  when '--debug'
+    debug = true
+  when '--compiler-prefix'
+    compiler = "#{arg}g"
+    linker = "#{arg}l"
+    binext = arg
+  when '--cflags'
+    cflags = arg.split(' ')
+  when '--lflags'
+    lflags = arg.split(' ')
   end
 end
 
-puts "using #{compiler} and #{linker}" if Debug
+puts "using #{compiler} and #{linker}" if debug
 
 TextMate.require_cmd compiler
 TextMate.require_cmd linker
@@ -48,21 +55,13 @@ end
 
 filepath = ARGV[0]
 base = filepath.chomp(File.extname(filepath))
-puts "Using base file path #{base}" if Debug
-
-cflags = (ENV["TM_GO_CFLAGS"] || '').split(' ')
-lflags = (ENV["TM_GO_LFLAGS"] || '').split(' ')
-if lflags.nil?
-  lflags = ['-o', "#{base}"]
-else
-  lflags << '-o' << "#{base}"
-end
+puts "Using base file path #{base}" if debug
 
 cmd = "#{compiler} #{cflags.join(' ')} #{filepath}"
 
 unless use_gcc
   # run the compiler to generate xxx.6 from xxx.go
-  puts "#{cmd}" if Debug
+  puts "#{cmd}" if debug
   output = `#{cmd}`
   unless output.empty?
     print output
@@ -70,7 +69,7 @@ unless use_gcc
   end
   #run the linker to generate xxx from xxx.6
   cmd = "#{linker} #{lflags.join(' ')} #{base}.#{binext}"
-  puts "#{cmd}" if Debug
+  puts "#{cmd}" if debug
   output = `#{cmd}`
   `rm #{base}.#{binext}`
   unless output.empty?

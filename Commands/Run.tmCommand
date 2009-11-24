@@ -15,18 +15,44 @@ TextMate::Executor.make_project_master_current_document
 
 filepath = ENV['TM_FILEPATH']
 
-# run the compiler
-#errors = `#{ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb'} #{filepath}`
-#print errors
-#
-#args = []
-#if errors.empty?
-#  args = [filepath.chomp(File.extname(filepath))]
-#else
-#  args = ['/usr/bin/env', 'echo', "#{errors}"]
-#end
+machine = `sysctl hw.machine | awk -F" " '{print $2}'`
+is64Bit = `sysctl hw.optional.x86_64 | awk -F" " '{print $2}'`
 
-args = [ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb', filepath]
+prefix = '6'
+cflags = ENV['TM_GO_CFLAGS']
+lflags = ENV['TM_GO_LFLAGS']
+
+use_gcc = (ENV['TM_GO_USE_GCC'] == '1')
+unless use_gcc
+  case machine
+  when 'arm'
+    prefix = '5'
+  when 'i386'
+    if is64Bit == 0
+      prefix = '8'
+    end
+  end
+end
+
+if use_gcc
+  TextMate.require_cmd 'gcc'
+else
+  TextMate.require_cmd "#{prefix}g"
+  TextMate.require_cmd "#{prefix}l"
+end
+
+args = [ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb']
+if use_gcc
+  args &lt;&lt; '--use-gcc'
+else
+  args &lt;&lt; "--compiler-prefix=#{prefix}"
+end
+
+args &lt;&lt; "--cflags=\"#{cflags}\"" unless cflags.nil?
+args &lt;&lt; "--lflags=\"#{lflags}\"" unless lflags.nil?
+
+args &lt;&lt; filepath
+
 TextMate::Executor.run(args)</string>
 	<key>input</key>
 	<string>document</string>
