@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'open3'
 require 'fileutils'
 include FileUtils::Verbose
 
@@ -47,6 +48,7 @@ end
 
 filepath = ARGV[0]
 base = filepath.chomp(File.extname(filepath))
+puts "Using base file path #{base}" if Debug
 
 cflags = (ENV["TM_GO_CFLAGS"] || '').split(' ')
 lflags = (ENV["TM_GO_LFLAGS"] || '').split(' ')
@@ -82,7 +84,3 @@ else
     exit 1
   end
 end
-
-# run the built file, echoing its output
-output = `#{base}`
-print output
