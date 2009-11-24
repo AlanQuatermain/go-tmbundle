@@ -84,3 +84,5 @@ else
     exit 1
   end
 end
+
+print `#{base}`

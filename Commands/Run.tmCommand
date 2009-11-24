@@ -16,16 +16,17 @@ TextMate::Executor.make_project_master_current_document
 filepath = ENV['TM_FILEPATH']
 
 # run the compiler
-errors = `#{ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb'} #{filepath}`
+#errors = `#{ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb'} #{filepath}`
+#print errors
+#
+#args = []
+#if errors.empty?
+#  args = [filepath.chomp(File.extname(filepath))]
+#else
+#  args = ['/usr/bin/env', 'echo', "#{errors}"]
+#end
 
-args = []
-if errors.nil? or errors.empty?
-  args = [filepath.chomp(File.extname(filepath))]
-else
-  args = ['/usr/bin/env', 'echo', "#{errors}"]
-end
-
-print args.join(' ')
+args = [ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb', filepath]
 TextMate::Executor.run(args)</string>
 	<key>input</key>
 	<string>document</string>
