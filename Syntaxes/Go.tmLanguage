@@ -392,38 +392,33 @@
 				<dict>
 					<key>captures</key>
 					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>keyword.control.go</string>
 						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
 					</dict>
 					<key>comment</key>
 					<string>This matches the 'var x int = 0' style of variable declaration.</string>
 					<key>match</key>
-					<string>^[[:blank:]]*(var)(?:\s+([[:alpha:]_][[:alnum:]_]*[,[:blank:]]*(?:[[:alpha:]_][[:alnum:]_]*)*))</string>
+					<string>^[[:blank:]]*(var)\s+(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*</string>
 					<key>name</key>
 					<string>meta.initialization.explicit.go</string>
 				</dict>
 				<dict>
 					<key>captures</key>
 					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.go</string>
+						</dict>
 						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
-						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>keyword.operator.initialize.go</string>
@@ -432,7 +427,7 @@
 					<key>comment</key>
 					<string>This matches the 'x := 0' style of variable declaration.</string>
 					<key>match</key>
-					<string>([[:alpha:]_][[:alnum:]_]*,[[:blank:]]*)*([[:alpha:]_][[:alnum:]_]*)\s*(:=)</string>
+					<string>^[[:blank:]]*(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*\s*(:=)</string>
 					<key>name</key>
 					<string>meta.initialization.short.go</string>
 				</dict>
