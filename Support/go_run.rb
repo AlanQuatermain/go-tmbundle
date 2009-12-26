@@ -12,7 +12,6 @@ require ENV["TM_SUPPORT_PATH"] + "/lib/tm/require_cmd"
 
 debug = false
 use_gcc = false
-build_package = false
 compiler = '6g'
 linker = '6l'
 binext = '6'
@@ -22,7 +21,6 @@ lflags = []
 opts = GetoptLong.new(
   ['--use-gcc', '-g', GetoptLong::NO_ARGUMENT],
   ['--compiler-prefix', '-p', GetoptLong::REQUIRED_ARGUMENT],
-  ['--build-package', '-b', GetoptLong::NO_ARGUMENT],
   ['--debug', '-d', GetoptLong::NO_ARGUMENT],
   ['--cflags', '-c', GetoptLong::REQUIRED_ARGUMENT],
   ['--lflags', '-l', GetoptLong::REQUIRED_ARGUMENT],
@@ -39,8 +37,6 @@ opts.each do |opt, arg|
     compiler = "#{arg}g"
     linker = "#{arg}l"
     binext = arg
-  when '--build-package'
-    build_package = true
   when '--cflags'
     cflags = arg.split(' ')
   when '--lflags'
@@ -61,7 +57,7 @@ if ARGV.count < 1
   exit 65
 end
 
-filepath = ARGV.shift
+filepath = ARGV[0]
 base = filepath.chomp(File.extname(filepath))
 puts "Using base file path #{base}" if debug
 
@@ -69,29 +65,20 @@ cmd = "#{compiler} #{cflags.join(' ')} #{filepath}"
 
 unless use_gcc
   # run the compiler to generate xxx.6 from xxx.go
-  puts cmd if debug
+  puts "#{cmd}" if debug
   output = `#{cmd}`
   unless output.empty?
     print output
     exit 1
   end
-  
-  cmd = ''
-  if build_package
-    # run gopack to create the package archive
-    cmd = "gopack grcv #{base}.a #{base}.#{binext}"
-  else
-    #run the linker to generate xxx from xxx.6
-    cmd = "#{linker} #{lflags.join(' ')} -o #{base} #{base}.#{binext}"
-  end
-  
-  puts cmd if debug || build_package
+  #run the linker to generate xxx from xxx.6
+  cmd = "#{linker} #{lflags.join(' ')} #{base}.#{binext}"
+  puts "#{cmd}" if debug
   output = `#{cmd}`
   `rm #{base}.#{binext}`
-  
   unless output.empty?
     print output
-    exit (build_package ? 0 : 1)
+    exit 1
   end
 else
   output = `#{args.join(' ')}`
@@ -101,4 +88,4 @@ else
   end
 end
 
-print `#{base}` unless build_package
+print `#{base}`
