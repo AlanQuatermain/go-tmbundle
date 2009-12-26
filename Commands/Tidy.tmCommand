@@ -11,7 +11,7 @@ fi
 
 require_cmd gofmt
 
-result=`gofmt ${GOFMT_SPACES} -tabwidth=${TM_TAB_SIZE} ${TM_FILEPATH} 2&gt;&amp;1`
+result=`gofmt -oldparser=false -oldprinter=false ${GOFMT_SPACES} -tabwidth=${TM_TAB_SIZE} ${TM_FILEPATH} 2&gt;&amp;1`
 if [[ $? &gt; 0 ]];
 	then exit_show_tool_tip "Errors: $result"
 	else echo "$result"
