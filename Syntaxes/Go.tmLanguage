@@ -258,25 +258,12 @@
 		</dict>
 		<key>exported_variables</key>
 		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.control.go</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.exported.go</string>
-				</dict>
-			</dict>
 			<key>comment</key>
 			<string>This is kinda hacky, in order to get the 'var' scoped the right way again.</string>
 			<key>match</key>
-			<string>^\s*(?:(var)\s+)?([[:upper:]][[:alnum:]_]*)</string>
+			<string>(?&lt;=\s|\[\])([[:upper:]][[:alnum:]_]*)(?=\W+)</string>
 			<key>name</key>
-			<string>meta.exported-variable-declaration.go</string>
+			<string>variable.exported.go</string>
 		</dict>
 		<key>fn_parens</key>
 		<dict>
@@ -427,7 +414,7 @@
 					<key>comment</key>
 					<string>This matches the 'x := 0' style of variable declaration.</string>
 					<key>match</key>
-					<string>^[[:blank:]]*(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*\s*(:=)</string>
+					<string>(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*\s*(:=)</string>
 					<key>name</key>
 					<string>meta.initialization.short.go</string>
 				</dict>
@@ -479,9 +466,9 @@
 		<dict>
 			<key>begin</key>
 			<string>(?x)
-    	            (func)\s*
+    	            ^[[:blank:]]*(func)\s*
     	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
-    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )               # required braces for parameters (even if empty)
+    	            (?: \( ((?:[\[\]\w\d\s\/,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )             # required braces for parameters (even if empty)
     	            \s*
     	            (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
     	    </string>
@@ -659,7 +646,7 @@
                         [,;:_]?                                     # separator character (AltiVec)
                         ((-?\d+)|\*(-?\d+\$)?)?                     # minimum field width
                         (\.((-?\d+)|\*(-?\d+\$)?)?)?                # precision
-                        [diouxXDOUeEfFgGaAcCsSpnvtT%]               # conversion type
+                        [diouxXDOUeEfFgGaAcCsSpnvtTbyYhHmMzZ%]      # conversion type
                     </string>
 					<key>name</key>
 					<string>constant.other.placeholder.go</string>
@@ -736,10 +723,6 @@
 					<string>string.quoted.single.go</string>
 					<key>patterns</key>
 					<array>
-						<dict>
-							<key>include</key>
-							<string>#string_placeholder</string>
-						</dict>
 						<dict>
 							<key>include</key>
 							<string>#string_escaped_char</string>
