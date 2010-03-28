@@ -16,7 +16,7 @@ At present there are still a couple of odd things to clear up. If anyone can sug
 +struct+:: lays out a structure declaration (use 'type' first to name your structure) with a tab stop on a sample member variable.
 +main+::   creates a plain 'main()' function for you.
 +for+::    lays out a standard for loop, with tab stops for count, variable name, and loop-end action.
-+if+::     lays out a plain if statement, with curly braces, tab stop on the condition. This is here because an if in Go MUST use braces it seems, and this is as good a way as any to force myself (and others) to remember that.
++if+::     lays out a plain if statement, with curly braces, tab stop on the condition. This is here because an 'if' statement in Go MUST use braces it seems, and this is as good a way as any to force myself (and others) to remember that.
 
 === Compiling and Running
 The Run() function will run 6g on your source file, then run 6l on the new <name>.6 file, then run the resulting 6.out file. All files will be created in the same folder as the source file. It doesn't do anything about building packages yet-- that's something I'll add later on. In the meantime, to build a package archive (or append new .6 files to an existing package archive) you would use:

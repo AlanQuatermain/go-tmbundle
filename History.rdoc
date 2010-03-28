@@ -1,3 +1,7 @@
+=== 1.0.3 / 2010-03-28
+* Removed the no-longer-supported -oldparser flags from the invocation of the gofmt command
+(http://github.com/AlanQuatermain/go-tmbundle/issues/issue/2)
+
 === 1.0.2 / 2010-02-16
 * Removed the no-longer-supported -oldprinter flag from the invocation of the gofmt command (http://github.com/AlanQuatermain/go-tmbundle/issues/issue/1)
 
