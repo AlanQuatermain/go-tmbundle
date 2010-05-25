@@ -9,7 +9,7 @@
 
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
 
-filepath = ENV['TM_FILEPATH']
+filepath = "\"#{ENV['TM_FILEPATH']}\""
 
 machine = `sysctl hw.machine | awk -F" " '{print $2}'`.rstrip
 is64Bit = `sysctl hw.optional.x86_64 | awk -F" " '{print $2}'`.rstrip.to_i

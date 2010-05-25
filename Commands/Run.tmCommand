@@ -13,7 +13,7 @@ require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 TextMate.save_current_document('go')
 TextMate::Executor.make_project_master_current_document
 
-filepath = ENV['TM_FILEPATH']
+filepath = "\"#{ENV['TM_FILEPATH']}\""
 
 machine = `sysctl hw.machine | awk -F" " '{print $2}'`.rstrip
 is64Bit = `sysctl hw.optional.x86_64 | awk -F" " '{print $2}'`.rstrip.to_i
