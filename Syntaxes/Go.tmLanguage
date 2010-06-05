@@ -3,7 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>comment</key>
-	<string>Go allows any Unicode character to be used in identifiers, so our identifier regex is: \b([[:alpha:]_]+[[:alnum:]_]*)\b</string>
+	<string>Go allows any Unicode character to be used in identifiers, so our identifier regex is: \b([[:alpha:]_]+[[:alnum:]_]*)\b
+	cf. The Go Programming Language Specification &lt;http://golang.org/doc/go_spec.html&gt;</string>
 	<key>fileTypes</key>
 	<array>
 		<string>go</string>
