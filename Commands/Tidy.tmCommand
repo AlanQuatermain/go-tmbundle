@@ -3,25 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>saveActiveFile</string>
+	<string>nop</string>
 	<key>command</key>
-	<string>if [[ "$TM_SOFT_TABS" = "YES" ]];
-	then export GOFMT_SPACES="-spaces"
-fi
+	<string>#!/bin/bash
 
 require_cmd gofmt
 
-result=`gofmt ${GOFMT_SPACES} -tabwidth=${TM_TAB_SIZE} ${TM_FILEPATH} 2&gt;&amp;1`
-if [[ $? &gt; 0 ]];
-	then exit_show_tool_tip "Errors: $result"
-	else echo "$result"
-fi</string>
+GOFMT_SPACING="-tabwidth=$TM_TAB_SIZE"
+if [[ "$TM_SOFT_TABS" = "YES" ]]; then
+	GOFMT_SPACING="-spaces $GOFMT_SPACING"
+fi
+
+if ! gofmt $GOFMT_SPACING 2&gt;&amp;1; then
+	exit_show_tool_tip
+fi
+</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>^H</string>
 	<key>name</key>
-	<string>Tidy</string>
+	<string>Reformat Document</string>
 	<key>output</key>
 	<string>replaceDocument</string>
 	<key>scope</key>
