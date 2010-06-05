@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+. goarch
+
+require_cmd "$GC"
+require_cmd "$AR"
+
+case "$*" in
+--version)
+	exec "$GC" -V
+	;;
+esac
+
+TMPDIR="`mktemp -d -t gopack`"
+trap "rm -rf '$TMPDIR'" EXIT
+
+BASENAME="`basename -- "$*" .go`"
+SOURCE="$*"
+TARGET="$TMPDIR/$BASENAME.a"
+OBJECT="$TMPDIR/$BASENAME.$O"
+
+set -e
+
+"$GC" -o "$OBJECT" "$SOURCE" 1>&2
+"$AR" vgrc "$TARGET" "$OBJECT" | /usr/bin/sed "s|$TMPDIR/*||"
+echo "Build succeeded."

@@ -13,47 +13,8 @@ require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 TextMate.save_current_document('go')
 TextMate::Executor.make_project_master_current_document
 
-filepath = "\"#{ENV['TM_FILEPATH']}\""
-
-machine = `sysctl hw.machine | awk -F" " '{print $2}'`.rstrip
-is64Bit = `sysctl hw.optional.x86_64 | awk -F" " '{print $2}'`.rstrip.to_i
-
-cmd_prefix = '6'
-cflags = ENV['TM_GO_CFLAGS']
-lflags = ENV['TM_GO_LFLAGS']
-
-use_gcc = (ENV['TM_GO_USE_GCC'] == '1')
-unless use_gcc
-  case machine
-  when 'arm'
-    cmd_prefix = '5'
-  when 'i386'
-    if is64Bit == 0
-      cmd_prefix = '8'
-    end
-  end
-end
-
-if use_gcc
-  TextMate.require_cmd 'gcc'
-else
-  TextMate.require_cmd "#{cmd_prefix}g"
-  TextMate.require_cmd "#{cmd_prefix}l"
-end
-
-args = [ENV['TM_BUNDLE_SUPPORT'] + '/go_run.rb']
-if use_gcc
-  args &lt;&lt; '--use-gcc'
-else
-  args &lt;&lt; "--compiler-prefix=#{cmd_prefix}"
-end
-
-args &lt;&lt; "--cflags=\"#{cflags}\"" unless cflags.nil?
-args &lt;&lt; "--lflags=\"#{lflags}\"" unless lflags.nil?
-
-args &lt;&lt; filepath
-
-TextMate::Executor.run(args)</string>
+TextMate::Executor.run(["#{ENV['TM_BUNDLE_SUPPORT']}/gorun", ENV['TM_FILEPATH']], :interactive_input =&gt; false)
+</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>

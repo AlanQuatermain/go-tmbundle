@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+. goarch
+
+require_cmd "$GC"
+require_cmd "$LD"
+
+case "$*" in
+--version)
+	exec "$GC" -V
+	;;
+esac
+
+TMPDIR="`mktemp -d -t gorun`"
+trap "rm -rf '$TMPDIR'" EXIT
+
+BASENAME="`basename -- "$*" .go`"
+SOURCE="$*"
+TARGET="$TMPDIR/$BASENAME"
+OBJECT="$TMPDIR/$BASENAME.$O"
+
+set -e
+
+"$GC" -o "$OBJECT" "$SOURCE" 1>&2
+"$LD" -o "$TARGET" "$OBJECT" 1>&2
+"$TARGET"
