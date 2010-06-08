@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>type ${1:name} ${2:int8}</string>
+	<string>type ${1:name} ${0:definition}</string>
 	<key>name</key>
 	<string>Type</string>
 	<key>scope</key>
