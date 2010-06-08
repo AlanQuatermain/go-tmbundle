@@ -10,7 +10,7 @@
 		<string>go</string>
 	</array>
 	<key>firstLineMatch</key>
-	<string>-[*]-( [Mm]ode:)? [Gg]o -[*]-</string>
+	<string>(?i)-[*]-\s*(mode:)?\s*go\s*-[*]-</string>
 	<key>foldingStartMarker</key>
 	<string>(?x)
           /\*\*(?!\*)                           # opening C-style comment with 2 asterisks but no third later on
