@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>${1:channel}${1/(.+)/ /}&lt;- ${0:${1/(.+)?/(?1:value:channel)/)}}</string>
+	<key>name</key>
+	<string>Send/Receive</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>&lt;</string>
+	<key>uuid</key>
+	<string>0E515A1F-B6F7-4473-B4C6-D6485E7CD133</string>
+</dict>
+</plist>
