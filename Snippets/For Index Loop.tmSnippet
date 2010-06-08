@@ -4,14 +4,14 @@
 <dict>
 	<key>content</key>
 	<string>for ${2:i} := 0; $2 &lt; ${1:count}; ${3:$2++} {
-	$0
+	${0:// body}
 }</string>
 	<key>name</key>
-	<string>For Loop</string>
+	<string>For Index Loop</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
-	<string>for</string>
+	<string>fori</string>
 	<key>uuid</key>
 	<string>7DA0072A-BF35-413B-B4D9-B5C2B4D20FF2</string>
 </dict>
