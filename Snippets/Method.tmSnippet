@@ -3,15 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>func (${1:varname typename}) ${2:func_name}($3)$4 {
-	$0
-}</string>
+	<string>func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}${5:type} {
+	${0:// body}
+}
+</string>
 	<key>name</key>
-	<string>Type Function</string>
+	<string>Method</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
-	<string>tfunc</string>
+	<string>meth</string>
 	<key>uuid</key>
 	<string>D8CF6ACF-85BB-4AAD-BFDE-DFD9D075FCF2</string>
 </dict>
