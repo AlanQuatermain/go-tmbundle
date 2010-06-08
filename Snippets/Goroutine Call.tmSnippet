@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>go func($1) {
-	$0
-}${2:($3)}</string>
+	<string>go func(${1:params}) {
+	${0:// body}
+}(${2:${1/(.+)?/(?1:values)/}})</string>
 	<key>name</key>
-	<string>go func()</string>
+	<string>Goroutine Call</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
-	<string>gfn</string>
+	<string>go</string>
 	<key>uuid</key>
 	<string>6B01E886-4CFA-476E-AE01-EFF406116978</string>
 </dict>
