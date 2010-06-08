@@ -4,10 +4,11 @@
 <dict>
 	<key>content</key>
 	<string>func main() {
-	$0
-}</string>
+	${0:// body}
+}
+</string>
 	<key>name</key>
-	<string>main()</string>
+	<string>Main Function</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
