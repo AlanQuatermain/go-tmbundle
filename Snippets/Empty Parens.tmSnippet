@@ -9,9 +9,9 @@
 	<key>keyEquivalent</key>
 	<string></string>
 	<key>name</key>
-	<string>Empty ()</string>
+	<string>Empty Parens</string>
 	<key>scope</key>
-	<string>meta.parens.empty.go</string>
+	<string>source.go meta.parens.empty.go</string>
 	<key>uuid</key>
 	<string>214A69FB-0168-465E-AB51-D8C6C46BCF61</string>
 </dict>
