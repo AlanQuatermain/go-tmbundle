@@ -4,7 +4,7 @@
 <dict>
 	<key>content</key>
 	<string>struct {
-	${0:var vartype;}
+	${0:member}
 }</string>
 	<key>name</key>
 	<string>Struct</string>
