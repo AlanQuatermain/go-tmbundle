@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>${1/^main$|(.+)/(?1:\/*
+	The $1 package implements ... bananas?
+*\/
+)/}package ${1:main}
+</string>
+	<key>name</key>
+	<string>Package</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>pkg</string>
+	<key>uuid</key>
+	<string>CFE21C25-71DE-48A9-8FE6-2A40D8DF16EF</string>
+</dict>
+</plist>
