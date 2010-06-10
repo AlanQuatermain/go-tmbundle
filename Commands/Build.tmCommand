@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+
+TextMate.save_current_document('go')
+
+TextMate::Executor.run(["#{ENV['TM_BUNDLE_SUPPORT']}/gomake", ENV['TM_FILEPATH']], :interactive_input =&gt; false, :verb =&gt; "Building")
+</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@b</string>
+	<key>name</key>
+	<string>Build</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>20810F68-79E2-4D36-B222-6374BDEAB7B9</string>
+</dict>
+</plist>
