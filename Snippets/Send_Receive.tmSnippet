@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>${1:channel}${1/(.+)/ /}&lt;- ${0:${1/(.+)?/(?1:value:channel)/)}}</string>
+	<string>${1:channel}${1/(.+)/ /}&lt;-${0:${1/(.+)?/(?1: value:channel)/)}}</string>
 	<key>name</key>
 	<string>Send/Receive</string>
 	<key>scope</key>
