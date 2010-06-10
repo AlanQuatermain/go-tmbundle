@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>defer func(${1:params}) {
+	${0:// body}
+}(${2:${1/(.+)?/(?1:values)/}})</string>
+	<key>name</key>
+	<string>Deferred Call</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>de</string>
+	<key>uuid</key>
+	<string>92CF0E27-7ED9-4F9B-8061-DD2B38D22893</string>
+</dict>
+</plist>
