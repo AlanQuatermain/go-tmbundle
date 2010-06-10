@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
 . goarch
+. goversion
 
 require_cmd "$GC"
-
-case "$*" in
---version)
-	exec "$GC" -V
-	;;
-esac
 
 SOURCE="$*"
 TARGET="/dev/null"

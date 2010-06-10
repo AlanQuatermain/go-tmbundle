@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+require_cmd "$GC"
+
+case "$*" in
+--version)
+	exec "$GC" -V
+	;;
+esac

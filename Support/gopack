@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 
 . goarch
+. goversion
 
 require_cmd "$GC"
 require_cmd "$AR"
-
-case "$*" in
---version)
-	exec "$GC" -V
-	;;
-esac
 
 TMPDIR="`mktemp -d -t gopack`"
 trap "rm -rf '$TMPDIR'" EXIT
