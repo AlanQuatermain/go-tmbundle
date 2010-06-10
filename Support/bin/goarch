@@ -1,28 +1,37 @@
 #!/usr/bin/env bash
 
-go_arch_identifier () {
+go_arch () {
 	case "`sysctl -n hw.machine`" in
 	arm)
-		echo "5"
+		echo "arm"
 		;;
 	i386)
-		case `sysctl -n hw.optional.x86_64 2>/dev/null` in
+		case "`sysctl -n hw.optional.x86_64 2>/dev/null`" in
 		1)
-			echo "6"
+			echo "amd64"
 			;;
 		*)
-			echo "8"
+			echo "386"
 			;;
 		esac
 		;;
 	esac
 }
 
-O=`go_arch_identifier`
-AS=${O}a
-CC=${O}c
-GC=${O}g
-LD=${O}l
-NM=${O}nm
-AR=gopack
-MK=gomake
+go_arch_identifier () {
+	case "$*" in
+	arm)
+		echo "5"
+		;;
+	amd64)
+		echo "6"
+		;;
+	386)
+		echo "8"
+		;;
+	esac
+}
+
+GOOS=darwin
+GOARCH=`go_arch`
+export GOOS GOARCH

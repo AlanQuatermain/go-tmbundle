@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+. goarch
+
+O=`go_arch_identifier $GOARCH`
+AS=${O}a
+CC=${O}c
+GC=${O}g
+LD=${O}l
+NM=${O}nm
+AR=gopack
+MK=gomake
+
+require_cmd "$GC"
+
+if test -z "$GOBIN"; then
+	GOBIN="$(dirname "$(/usr/bin/which "$GC")")"
+fi
+
+export GOBIN
