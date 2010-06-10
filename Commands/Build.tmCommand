@@ -7,12 +7,9 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 
-require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
-require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
 
-TextMate.save_current_document('go')
-
-TextMate::Executor.run(["#{ENV['TM_BUNDLE_SUPPORT']}/gomake", ENV['TM_FILEPATH']], :interactive_input =&gt; false, :verb =&gt; "Building")
+gomate "gomake", "Building"
 </string>
 	<key>input</key>
 	<string>document</string>
