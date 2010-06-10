@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . goarch
+. goroot
 . goversion
 
 require_cmd "$GC"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if ! test -f "$GOROOT/include/u.h"; then
+    echo '$GOROOT is not set correctly or not exported' 1>&2
+    exit 1
+fi
+
+export GOROOT
