@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>func ${3:name}(${4:params})${5/(.+)/ /}${5:type}</string>
+	<string>func(${4:params})${5/(.+)/ /}${5:type}</string>
 	<key>name</key>
 	<string>Function Type</string>
 	<key>scope</key>
