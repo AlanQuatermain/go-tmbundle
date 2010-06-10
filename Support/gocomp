@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+. goarch
+
+require_cmd "$GC"
+
+case "$*" in
+--version)
+	exec "$GC" -V
+	;;
+esac
+
+SOURCE="$*"
+TARGET="/dev/null"
+
+set -e
+
+"$GC" -o "$TARGET" "$SOURCE" 1>&2
+echo "Build succeeded."
