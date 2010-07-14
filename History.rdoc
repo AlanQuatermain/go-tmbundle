@@ -1,3 +1,6 @@
+=== 1.2 / 2010-06-13
+* Many new snippets and updates to the command-runner implementation, courtesy of Martin Kühl (http://github.com/mkuhl).
+
 === 1.0.3 / 2010-03-28
 * Removed the no-longer-supported -oldparser flags from the invocation of the gofmt command
 (http://github.com/AlanQuatermain/go-tmbundle/issues/issue/2)

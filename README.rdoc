@@ -1,38 +1,62 @@
 == Go
 (a TextMate language bundle)
+Version 1.2
 
 ==== This project has been modified a little since it was first published. The original repository (no longer updated) is available at http://github.com/AlanQuatermain/old-go-tmbundle
 
 === Features
-The bundle here implements a language syntax, some snippets, and a 'Run' command for the Go language (http://golang.org).
-
-At present there are still a couple of odd things to clear up. If anyone can suggest how to change the Run script to stop after any errors compiling or linking, and to not output empty blocks for those steps if all went well, I would be very grateful.
+The bundle here implements a language syntax, some snippets, and some compile/format/documentation commands for the Go language (http://golang.org/). Much of the current infrastructure was created by Martin Kühl (http://github.com/mkhl), who is a significantly more seasoned TextMate bundle developer than I, and to whom I am eternally grateful.
 
 === Snippets
-+imp+::    sets up an import statement with optional alternative name.
-+func+::   creates a function declaration with tab-stops for name, parameters, and return types.
-+tfunc+::  creates a function as 'func' but adds the variable declaration needed to attach the function to a type (like a class method).
-+type+::   initializes a type declaration for you, with name and variable type as tab-stops.
-+struct+:: lays out a structure declaration (use 'type' first to name your structure) with a tab stop on a sample member variable.
-+main+::   creates a plain 'main()' function for you.
-+for+::    lays out a standard for loop, with tab stops for count, variable name, and loop-end action.
-+if+::     lays out a plain if statement, with curly braces, tab stop on the condition. This is here because an 'if' statement in Go MUST use braces it seems, and this is as good a way as any to force myself (and others) to remember that.
++pkg+::		a package declaration including an optional comment block for packages other than 'main'.
++imp+::		an import statement with optional alternative name.
++imps+::	a multiple-import statement.
++type+::	a type declaration, with name and variable type as tab-stops.
++types+::	a block with multiple type declarations.
++con+::		a single constant declaration.
++cons+::	a multiple constant declaration block.
++var+::		declare a variable with an optional initial value (long form, i.e. 'var x int = 10').
++vars+::	a block of long-form variable declarations.
++func+::	a plain (global) function declaration, with tab stops for name, parameters, and return types.
++meth+::	declares a function on a particular type, with additional tab stops for receiver name and type.
++in+::		an empty interface declaration (i.e. matches anything).
++int+::		an interface definition with a single method.
++st+::		a struct definition with a single member.
++[]+::		a slice variable type; expands to '[]+type+', so is usable inside other snippets.
++map+::		a map variable type; works similar to the slice type above.
++ch+::		a channel type.
++fun+::		a function type definition statement.
++:+::		a short-form variable initializer (i.e. 'name := value').
++mk+::		a make statement (used for creating & initializing channels, maps, etc.).
++new+::		a new statement (used to create & initialize structure types).
++Cmd-i+::	'iota'
++if+::		an if statement, properly formatted (Go requires the use of {} on ifs, unlike C; this throws me sometimes).
++sw+::		a switch statement with an optional expression.
++sel+::		a select statement.
++case+::	a case clause, within a switch or select.
++def+::		a default clause within a switch.
++for+::		a for loop.
++fori+::	a for loop with an index (similar to C for loops).
++forr+::	a for loop iterating over a collection's range.
++go+::		an immediate goroutine call (defines the function inline).
++de+::		a deferred call (defines the function inline).
++main+::	skeleton main() function.
++init+::	skeleton init() function.
++,+::		a pair ('first, second').
++<+::		send/receive through a channel.
++ret+::		a return statement with optional return value.
 
-=== Compiling and Running
-The Run() function will run 6g on your source file, then run 6l on the new <name>.6 file, then run the resulting 6.out file. All files will be created in the same folder as the source file. It doesn't do anything about building packages yet-- that's something I'll add later on. In the meantime, to build a package archive (or append new .6 files to an existing package archive) you would use:
-
-  > 6g myfile.go
-  > gopack rg <archive>.a myfile.6 ...
-
-+<archive>+ is the name for your archive file, and you can specify multiple +.6+ files to be appended to that archive. So for instance:
-
-  > 6g my_io.go my_file.go my_echo.go my_cat.go
-  > gopack rg my_stuff.a my_io.6 my_file.6 my_echo.6 my_cat.6
-
-This creates or updates an output file named +my_stuff.a+.
+=== Commands
++Cmd-R+::			Compile and run the current file.
++Cmd-B+::			Build the current project using gomake.
++Cmd-Opt-B+::		Build the current project as a package using gomake & gopack.
++Cmd-K+::			Compile the current file.
++Ctrl-Shift-H+::	Reformat the document according to the Go style guidelines using gofmt.
++Ctrl-H+::			Show the Go HTML documentation for the currently-selected symbol.
 
 === Thanks
 Thanks be to lasersox and Infininight over at the #textmate room on IRC (irc://irc.freenode.net/textmate) for all their help in cleaning up this here bundle, and for helping me to optimize my regex use in the language grammar.
+Thanks to Martin Kühl for his extensive additions to this project's snippets and commands.
 
 === Contact Information
 
