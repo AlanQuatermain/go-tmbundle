@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+. gobin
+. goversion
+
+require_cmd "$GC"
+require_cmd "$GT"
+
+SOURCE="$*"
+TARGET="/dev/null"
+
+set -e
+
+if [[ -n "$TM_PROJECT_DIRECTORY" ]]; then
+	cd "$TM_PROJECT_DIRECTORY"
+elif [[ -n "$TM_DIRECTORY" ]]; then
+	cd "$TM_DIRECTORY"
+fi
+
+"$GT" 2>&1
+echo "Testing complete."

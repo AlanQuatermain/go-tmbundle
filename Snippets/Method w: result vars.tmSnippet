@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>func (${1:receiver} ${2:type}) ${3:name}(${4:params}) (${5:type}) {
+	${0:// body}
+}
+</string>
+	<key>name</key>
+	<string>Method w/ result vars</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>methv</string>
+	<key>uuid</key>
+	<string>0DF6CCE2-56DF-43EF-8EEE-BDFFEC38C244</string>
+</dict>
+</plist>

@@ -10,6 +10,7 @@ LD=${O}l
 NM=${O}nm
 AR=gopack
 MK=gomake
+GT=gotest
 
 require_cmd "$GC"
 
