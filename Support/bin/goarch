@@ -32,6 +32,6 @@ go_arch_identifier () {
 	esac
 }
 
-GOOS=darwin
-GOARCH=`go_arch`
+: ${GOOS:=darwin}
+: ${GOARCH:=`go_arch`}
 export GOOS GOARCH
