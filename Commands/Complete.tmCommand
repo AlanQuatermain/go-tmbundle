@@ -37,17 +37,59 @@ system( ENV['DIALOG'], "images", "--register", icon_plist )
 
 # helper function to build the choice hash
 def make_completion_hash(line)
-  comp = line.split(",", 5)
+  comp = line.split(",,", 3)
 
-  match = comp[2]
+  match = comp[1]
   image = comp[0]
 
-  display = " " + comp[2]
-  display += comp[0] == "func" ? comp[4].gsub(/^func/, "") : " " + comp[4]
+  display = " " + comp[1]
+  display += comp[0] == "func" ? comp[2].gsub(/^func/, "") : " " + comp[2]
+  
+  # input : "foo(x func(func())) (z int, k int)"
+  # output: "0000111111122222210001111111111110"
+  def depth_at_i(sig)
+    depths = Array.new
+    depth = 0
+    sig.chars { |ch|
+      depth-=1 if ch == ")"
+      depths &lt;&lt; depth
+      depth+=1 if ch == "("
+    }
+    return depths
+  end
+
+  # returns function arguments in the form "x arg, y arg"
+  def get_f_args(sig)
+    depths = depth_at_i(sig)
+    pos = sig.index(")")
+    while pos != nil &amp;&amp; depths[pos] &gt; 0
+      pos = sig.index(")", pos+1)
+    end
+    return sig[ Range.new(sig.index("(")+1, pos - 1) ]
+  end
+  
+  def split_args(sig)
+    args = Array.new
+    depths = depth_at_i(sig)
+    start = 0
+    pos = sig.index(",")
+
+    while pos != nil
+      if depths[pos] == 0
+        args &lt;&lt; sig[ Range.new(start, pos-1) ]  
+        start = pos+1
+      end
+      pos = sig.index(",", pos+1)
+    end
+
+    lastarg = sig[ Range.new(start, sig.length) ].strip
+    args &lt;&lt; lastarg unless lastarg == ""
+    return args
+  end
 
   if comp[0] == "func"
     i = 0
-    insert = display.scan(/\(.*?\)/)[0].gsub(/([\w][\w .{}]+)/) { |m| "${#{i += 1}:"+e_snp(m)+"}" } + "$0"
+    insert = "(" + split_args( get_f_args( display )).map { |m| "${#{i += 1}:"+e_snp(m)+"}" }.join(", ") + ")$0"
   else
     insert = ""
   end
