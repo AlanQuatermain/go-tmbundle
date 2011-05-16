@@ -6,9 +6,9 @@ Version 1.2
 
 Ensure you've got a recent copy of git installed, then copy this line to your Terminal application and run it:
 
-<pre>
+<tt>
 > curl https://github.com/downloads/AlanQuatermain/go-tmbundle/install-go-tmbundle.sh | sh
-</pre>
+</tt>
 
 ==== This project has been modified a little since it was first published. The original repository (no longer updated) is available at http://github.com/AlanQuatermain/old-go-tmbundle
 
