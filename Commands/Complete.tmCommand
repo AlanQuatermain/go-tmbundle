@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -Ku
+require ENV['TM_SUPPORT_PATH'] + '/lib/ui.rb'
+require ENV['TM_SUPPORT_PATH'] + "/lib/escape.rb"
+require ENV['TM_SUPPORT_PATH'] + "/lib/tm/require_cmd.rb"
+require ENV['TM_SUPPORT_PATH'] + "/lib/tm/htmloutput.rb"
+
+TextMate.require_cmd("gocode")
+
+# current document
+document = STDIN.readlines
+
+# byte offset of cursor position from the beginning of file
+cursor = document[ 0, ENV['TM_LINE_NUMBER'].to_i - 1].join().length + ENV['TM_LINE_INDEX'].to_i
+
+output = IO.popen("gocode -f=csv autocomplete #{ENV['TM_FILEPATH']} #{cursor}", "w+") do |pipe|
+  pipe.puts document.join()
+  pipe.close_write
+  pipe.read
+end
+
+# quit if no completions found
+TextMate.exit_show_tool_tip("No completions found.") if output.length == 0
+
+# set up images for use by DIALOG
+# this probably should be done only once, somehow.
+icon_plist = "{ " + [ "const", "func", "package", "type", "var" ].map { |v| 
+  "#{v} = '#{ENV['TM_BUNDLE_SUPPORT']}/icons/#{v}.png';"
+}.join(" ") + " }"
+system( ENV['DIALOG'], "images", "--register", icon_plist )
+
+# helper function to build the choice hash
+def make_completion_hash(line)
+  comp = line.split(",,", 3)
+
+  match = comp[1]
+  image = comp[0]
+
+  display = " " + comp[1]
+  display += comp[0] == "func" ? comp[2].gsub(/^func/, "") : " " + comp[2]
+  
+  # input : "foo(x func(func())) (z int, k int)"
+  # output: "0000111111122222210001111111111110"
+  def depth_at_i(sig)
+    depths = Array.new
+    depth = 0
+    sig.chars { |ch|
+      depth-=1 if ch == ")"
+      depths &lt;&lt; depth
+      depth+=1 if ch == "("
+    }
+    return depths
+  end
+
+  # returns function arguments in the form "x arg, y arg"
+  def get_f_args(sig)
+    depths = depth_at_i(sig)
+    pos = sig.index(")")
+    while pos != nil &amp;&amp; depths[pos] &gt; 0
+      pos = sig.index(")", pos+1)
+    end
+    return sig[ Range.new(sig.index("(")+1, pos - 1) ]
+  end
+  
+  def split_args(sig)
+    args = Array.new
+    depths = depth_at_i(sig)
+    start = 0
+    pos = sig.index(",")
+
+    while pos != nil
+      if depths[pos] == 0
+        args &lt;&lt; sig[ Range.new(start, pos-1) ]  
+        start = pos+1
+      end
+      pos = sig.index(",", pos+1)
+    end
+
+    lastarg = sig[ Range.new(start, sig.length) ].strip
+    args &lt;&lt; lastarg unless lastarg == ""
+    return args
+  end
+
+  if comp[0] == "func"
+    i = 0
+    insert = "(" + split_args( get_f_args( display )).map { |m| "${#{i += 1}:"+e_snp(m)+"}" }.join(", ") + ")$0"
+  else
+    insert = ""
+  end
+  
+  return { 'match' =&gt; match, 'display' =&gt;  display, 'insert' =&gt; insert, 'image' =&gt; image }
+end
+
+# build the list of completion choices.
+hash = output.split("\n").collect { |v| make_completion_hash( v ) }
+options = { :extra_chars =&gt; "_", :case_insensitive =&gt; false }
+
+# if there is only one match, insert. no need to show the menu
+if hash.length == 1
+  word = ENV['TM_CURRENT_WORD'] || ""
+  snippet = hash[0]["match"].gsub(/^#{Regexp.escape(word)}/, "") + hash[0]["insert"]
+  TextMate.exit_insert_snippet( snippet )
+else
+  TextMate::UI.complete( hash , options )
+end</string>
+	<key>fallbackInput</key>
+	<string>word</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>Complete</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>FE908865-7729-4926-9FAC-2D54895BEA48</string>
+</dict>
+</plist>
