@@ -14,7 +14,7 @@ module Go
 
   def Go::href(file, line)
     file = normalize_file(file)
-    link = "txmt://open?line=#{$line}"
+    link = "txmt://open?line=#{line}"
     link << "&url=file://#{e_url(file)}"  if file
     link
   end
