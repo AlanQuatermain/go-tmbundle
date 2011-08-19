@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require "#{ENV['TM_SUPPORT_PATH']}/lib/Builder"
+# require "#{ENV['TM_SUPPORT_PATH']}/lib/Builder"
+require "#{ENV['TM_BUNDLE_SUPPORT']}/Builder"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape"
 require "pathname"
 
