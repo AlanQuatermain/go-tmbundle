@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 . gobin
-. goroot
+# . goroot
 . goversion
 
 require_cmd "$GC"
