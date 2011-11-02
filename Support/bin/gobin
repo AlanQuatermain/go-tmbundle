@@ -2,15 +2,19 @@
 
 . goarch
 
+if test -n "$GOBIN"; then
+	GOPREFIX=${GOBIN}/
+fi
+
 O=`go_arch_identifier $GOARCH`
-AS=${O}a
-CC=${O}c
-GC=${O}g
-LD=${O}l
-NM=${O}nm
-AR=gopack
-MK=gomake
-GT=gotest
+AS=${GOPREFIX}${O}a
+CC=${GOPREFIX}${O}c
+GC=${GOPREFIX}${O}g
+LD=${GOPREFIX}${O}l
+NM=${GOPREFIX}${O}nm
+AR=${GOPREFIX}gopack
+MK=${GOPREFIX}gomake
+GT=${GOPREFIX}gotest
 
 require_cmd "$GC"
 
