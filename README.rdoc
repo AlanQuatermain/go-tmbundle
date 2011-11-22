@@ -1,6 +1,6 @@
 == Go
 (a TextMate language bundle)
-Version 1.2
+Version 1.3
 
 === Installation
 
@@ -16,51 +16,54 @@ Ensure you've got a recent copy of git installed, then copy this line to your Te
 The bundle here implements a language syntax, some snippets, and some compile/format/documentation commands for the Go language (http://golang.org/). Much of the current infrastructure was created by Martin Kühl (http://github.com/mkhl), who is a significantly more seasoned TextMate bundle developer than I, and to whom I am eternally grateful.
 
 === Snippets
-+pkg+::		a package declaration including an optional comment block for packages other than 'main'.
-+imp+::		an import statement with optional alternative name.
-+imps+::	a multiple-import statement.
-+type+::	a type declaration, with name and variable type as tab-stops.
-+types+::	a block with multiple type declarations.
-+con+::		a single constant declaration.
-+cons+::	a multiple constant declaration block.
-+var+::		declare a variable with an optional initial value (long form, i.e. 'var x int = 10').
-+vars+::	a block of long-form variable declarations.
-+func+::	a plain (global) function declaration, with tab stops for name, parameters, and return types.
-+meth+::	declares a function on a particular type, with additional tab stops for receiver name and type.
-+in+::		an empty interface declaration (i.e. matches anything).
-+int+::		an interface definition with a single method.
-+st+::		a struct definition with a single member.
-+[]+::		a slice variable type; expands to '[]+type+', so is usable inside other snippets.
-+map+::		a map variable type; works similar to the slice type above.
-+ch+::		a channel type.
-+fun+::		a function type definition statement.
-+:+::		a short-form variable initializer (i.e. 'name := value').
-+mk+::		a make statement (used for creating & initializing channels, maps, etc.).
-+new+::		a new statement (used to create & initialize structure types).
-+Cmd-i+::	'iota'
-+if+::		an if statement, properly formatted (Go requires the use of {} on ifs, unlike C; this throws me sometimes).
-+sw+::		a switch statement with an optional expression.
-+sel+::		a select statement.
-+case+::	a case clause, within a switch or select.
-+def+::		a default clause within a switch.
-+for+::		a for loop.
-+fori+::	a for loop with an index (similar to C for loops).
-+forr+::	a for loop iterating over a collection's range.
-+go+::		an immediate goroutine call (defines the function inline).
-+de+::		a deferred call (defines the function inline).
-+main+::	skeleton main() function.
-+init+::	skeleton init() function.
-+,+::		a pair ('first, second').
-+<+::		send/receive through a channel.
-+ret+::		a return statement with optional return value.
+[pkg]		A package declaration including an optional comment block for packages other than 'main'.
+[imp]		An import statement with optional alternative name.
+[imps]	    A multiple-import statement.
+[type]  	A type declaration, with name and variable type as tab-stops.
+[types]	    A block with multiple type declarations.
+[con]		A single constant declaration.
+[cons]  	A multiple constant declaration block.
+[var]		Declare a variable with an optional initial value (long form, i.e. 'var x int = 10').
+[vars]  	A block of long-form variable declarations.
+[func]  	A plain (global) function declaration, with tab stops for name, parameters, and a single optional result.
+[funcv]  	A plain (global) function declaration, with tab stops for name, parameters, and multiple results.
+[meth]  	Declares a function on a particular type, with additional tab stops for receiver name and type and a single optional result.
+[meth]  	Declares a function on a particular type, with additional tab stops for receiver name and type and multiple results.
+[in]		An empty interface declaration (i.e. matches anything).
+[int]		An interface definition with a single method.
+[st]		A struct definition with a single member.
+[\[\]]		A slice variable type; expands to '[]+type+', so is usable inside other snippets.
+[map]		A map variable type; works similar to the slice type above.
+[ch]		A channel type.
+[fun]		A function type definition statement.
+[:]	    	A short-form variable initializer (i.e. 'name := value').
+[mk]		A make statement (used for creating & initializing channels, maps, etc.).
+[new]		A new statement (used to create & initialize structure types).
+[Cmd-i] 	'+iota+'
+[if]		An if statement, properly formatted (Go requires the use of {} on ifs, unlike C; this throws me sometimes).
+[sw]		A switch statement with an optional expression.
+[sel]		A select statement, for looping over channel conditions.
+[case]  	A case clause, within a switch or select.
+[def]		A default clause within a switch.
+[for]		A for loop.
+[fori]  	A for loop with an index (similar to C for loops).
+[forr]  	A for loop iterating over a collection's full range.
+[go]		An immediate goroutine call (defines the function inline).
+[de]		A deferred goroutine call (defines the function inline).
+[def]       A simple deferred function call (by default supplies '+defer file.Close()+').
+[main]      A template for a +main()+ function with a tab stop at its body.
+[init]      A template for a module's +init()+ function, with a tab stop at its body.
+[,] 		A pair ('first, second'), suitable for declaring result variables from a multi-return-value function or a map range loop.
+[<]		    Send/receive through a channel. Provides tab stops for the value and the channel name.
+[ret]		A return statement with optional return value.
 
 === Commands
-+Cmd-R+::			Compile and run the current file.
-+Cmd-B+::			Build the current project using gomake.
-+Cmd-Opt-B+::		Build the current project as a package using gomake & gopack.
-+Cmd-K+::			Compile the current file.
-+Ctrl-Shift-H+::	Reformat the document according to the Go style guidelines using gofmt.
-+Ctrl-H+::			Show the Go HTML documentation for the currently-selected symbol.
+[Cmd-R]			    Compile and run the current file.
+[Cmd-B]			    Build the current project using gomake.
+[Cmd-Opt-B]		    Build the current project as a package using gomake & gopack.
+[Cmd-K]			    Compile the current file.
+[Ctrl-Shift-H]  	Reformat the document according to the Go style guidelines using gofmt.
+[Ctrl-H]    		Show the Go HTML documentation for the currently-selected symbol.
 
 === Thanks
 Thanks be to lasersox and Infininight over at the #textmate room on IRC (irc://irc.freenode.net/textmate) for all their help in cleaning up this here bundle, and for helping me to optimize my regex use in the language grammar.

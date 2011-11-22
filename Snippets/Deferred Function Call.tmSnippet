@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>defer func(${1:params}) {
-	${0:// body}
-}(${2:${1/(.+)?/(?1:values)/}})</string>
+	<string>defer ${0:file.Close()}</string>
 	<key>name</key>
-	<string>Deferred Goroutine Call</string>
+	<string>Deferred Function Call</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
-	<string>de</string>
+	<string>def</string>
 	<key>uuid</key>
-	<string>92CF0E27-7ED9-4F9B-8061-DD2B38D22893</string>
+	<string>AA2A0BCD-98B2-4B31-9F54-4207073E201C</string>
 </dict>
 </plist>
