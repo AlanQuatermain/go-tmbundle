@@ -2,27 +2,27 @@
 * Includes a wrapper for +gotest+ on Cmd-Opt-T.
 * Imported some community additions and bugfixes to bring compatibility with OS X 10.7 and TextMate 1.5.1:
   [https://github.com/AlanQuatermain/go-tmbundle/commit/97f8c44552b0347c9d89f948a5fb92172f32daca]
-    *mkhl* _Use default values for GOOS and GOARCH only when necessary_
+    *mkhl* <em>Use default values for GOOS and GOARCH only when necessary.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/c85768b573f47d7274066b1260df6627ce35b82f]
-    *rsesek* _Include the receiver in entity.name.function scope so that it shows up in the symbol list_
+    *rsesek* <em>Include the receiver in entity.name.function scope so that it shows up in the symbol list.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/2eeb1c60f975af7cc3250964c9da58fca37d57f8]
-    *guncha* _Add gocode completion support_
+    *guncha* <em>Add gocode completion support.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/b730967fbd14e58bcc32d7f5157234cfa48f4043]
-    *guncha* _Add proper argument handling for functions_
+    *guncha* <em>Add proper argument handling for functions.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/837e04fba7e6e4a3127006be5fa3f1d04e357cba]
-    *guncha* _Fix links not working properly when html output is produced while compiling a project with errors_
+    *guncha* <em>Fix links not working properly when html output is produced while compiling a project with errors.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/69797af68e37e171fa12e3aa3f0ce9340369a453]
-    *chriseaton* _Size modifiers are not optional for float or complex_
+    *chriseaton* <em>Size modifiers are not optional for float or complex.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/05ba567d62018b87619d77653b728fcd25c270fb]
-    *schmurfy* _added x86_64 as a valid architecture string_
+    *schmurfy* <em>added x86_64 as a valid architecture string.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/2912e001142b2e0921f4f5f5c568734ccc6bf701]
-    *TassoLee* _Fix for issue #6_
+    *TassoLee* <em>Fix for issue #6.</em>
   [https://github.com/AlanQuatermain/go-tmbundle/commit/67e6118d245ba4d9901b2fe869ca2c3a3bea4672]
-    *TassoLee* _Revert goroot_
+    *TassoLee* <em>Revert goroot.</em>
   [https://github.com/guncha/go-tmbundle/commit/27142544725331d465aed364eacb67d2c4b1eeb7]
-    *guncha* _Fix for source filenames with spaces bug_
+    *guncha* <em>Fix for source filenames with spaces bug.</em>
   [https://github.com/KnightBaron/go-tmbundle/commit/eb925bb53f71ab472d67c5ac9cfd78d7cc02be85]
-    *KnightBaron* _Use GOBIN shell variable instead of PATH if present_
+    *KnightBaron* <em>Use GOBIN shell variable instead of PATH if present.</em>
 
 === 1.2 / 2010-06-13
 * Many new snippets and updates to the command-runner implementation, courtesy of Martin Kühl (http://github.com/mkhl).
