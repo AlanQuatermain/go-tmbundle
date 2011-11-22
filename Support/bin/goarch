@@ -5,6 +5,10 @@ go_arch () {
 	arm)
 		echo "arm"
 		;;
+	x86_64)
+	  echo "amd64"
+	  ;;
+	  
 	i386)
 		case "`sysctl -n hw.optional.x86_64 2>/dev/null`" in
 		1)
