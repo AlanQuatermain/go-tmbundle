@@ -5,8 +5,7 @@
 	<key>content</key>
 	<string>func${3/(.+)/ /}${3:name}(${4:params}) (${5:type}) {
 	${0:// body}
-}
-</string>
+}</string>
 	<key>name</key>
 	<string>Function w/ result vars</string>
 	<key>scope</key>

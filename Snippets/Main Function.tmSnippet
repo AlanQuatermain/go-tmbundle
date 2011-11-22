@@ -5,8 +5,7 @@
 	<key>content</key>
 	<string>func main() {
 	${0:// body}
-}
-</string>
+}</string>
 	<key>name</key>
 	<string>Main Function</string>
 	<key>scope</key>

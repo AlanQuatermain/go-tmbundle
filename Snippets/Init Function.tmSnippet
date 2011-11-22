@@ -5,8 +5,7 @@
 	<key>content</key>
 	<string>func init() {
 	${0:// body}
-}
-</string>
+}</string>
 	<key>name</key>
 	<string>Init Function</string>
 	<key>scope</key>

@@ -5,8 +5,7 @@
 	<key>content</key>
 	<string>import (
 	"${0:package}"
-)
-</string>
+)</string>
 	<key>name</key>
 	<string>Imports</string>
 	<key>scope</key>

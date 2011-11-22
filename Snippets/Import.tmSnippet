@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>import${2/(.+)/ /}${2:$1} "${1:package}"
-</string>
+	<string>import${2/(.+)/ /}${2:$1} "${1:package}"</string>
 	<key>name</key>
 	<string>Import</string>
 	<key>scope</key>

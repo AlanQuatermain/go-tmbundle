@@ -5,8 +5,7 @@
 	<key>content</key>
 	<string>const (
 	${1:name}${2/(.+)/ /}${2:type} = ${0:value}
-)
-</string>
+)</string>
 	<key>name</key>
 	<string>Constants</string>
 	<key>scope</key>
