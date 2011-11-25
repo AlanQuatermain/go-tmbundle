@@ -433,7 +433,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|64|ptr)?|float(32|64)|complex(64|128)|b(yte|ool)|string)\b</string>
+					<string>(\b|(?&lt;=\]))(int(16|8|32|64)?|uint(16|8|32|64|ptr)?|float(32|64)|complex(64|128)|b(yte|ool)|string|error)\b</string>
 					<key>name</key>
 					<string>storage.type.go</string>
 				</dict>
