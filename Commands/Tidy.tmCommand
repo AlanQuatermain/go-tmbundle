@@ -5,18 +5,10 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/bin/bash
+	<string>#!/usr/bin/env ruby
 
-require_cmd gofmt
-
-GOFMT_SPACING="-tabwidth=$TM_TAB_SIZE"
-if [[ "$TM_SOFT_TABS" = "YES" ]]; then
-	GOFMT_SPACING="-spaces $GOFMT_SPACING"
-fi
-
-if ! gofmt $GOFMT_SPACING 2&gt;&amp;1; then
-	exit_show_tool_tip
-fi
+require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
+Go::format
 </string>
 	<key>input</key>
 	<string>document</string>

@@ -2,24 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>beforeRunningCommand</key>
-	<string>nop</string>
 	<key>command</key>
 	<string>#!/bin/bash
 
+source "$TM_SUPPORT_PATH/lib/bash_init.sh"
+source "$TM_SUPPORT_PATH/lib/webpreview.sh"
+
 require_cmd godoc
 
-word="`cat | sed 's!\.! !g'`"
+word="$(cat)"
+terms="$(echo "${word}"|sed 's:\.: :g')"
 
-if test -n "`godoc $word`"; then
-	source "$TM_SUPPORT_PATH/lib/webpreview.sh"
-	html_header "Documentation for “${word}”"
-	godoc -html $word
-	html_footer
-	exit_show_html
+if godoc ${terms} &gt;/dev/null 2&gt;&amp;1; then
+  html_header "Documentation for “${word}”"
+  godoc -html ${terms}
+  html_footer
+  exit_show_html
+else
+  echo "Couldn't find documentation for “${word}”"
 fi
-
-echo "Couldn’t find documentation for “${word}”"
 </string>
 	<key>fallbackInput</key>
 	<string>word</string>

@@ -8,8 +8,7 @@
 	<string>#!/usr/bin/env ruby
 
 require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
-
-gomate "gotest", "Testing"
+Go::launch "test", :verb =&gt; "Testing", :scope =&gt; :package
 </string>
 	<key>input</key>
 	<string>document</string>
