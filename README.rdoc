@@ -1,16 +1,14 @@
 == Go
-(a TextMate language bundle)
+(a TextMate 2 language bundle)
 Version 1.3
 
 === Installation
 
-Ensure you've got a recent copy of git installed, then copy this line to your Terminal application and run it:
+Ensure you've got a recent copy of git installed, then in a Terminal window do:
 
-<tt>
-> curl -L https://github.com/downloads/AlanQuatermain/go-tmbundle/install-go-tmbundle.sh | sh
-</tt>
-
-==== This project has been modified a little since it was first published. The original repository (no longer updated) is available at http://github.com/AlanQuatermain/old-go-tmbundle
+    mkdir "$HOME/Library/Application Supports/Avian/Bundles"
+    cd "$HOME/Library/Application Supports/Avian/Bundles"
+    git checkout git://github.com/sdefresne/Go.tmbundle.git
 
 === Features
 The bundle here implements a language syntax, some snippets, and some compile/format/documentation commands for the Go language (http://golang.org/). Much of the current infrastructure was created by Martin Kühl (http://github.com/mkhl), who is a significantly more seasoned TextMate bundle developer than I, and to whom I am eternally grateful.
@@ -58,10 +56,10 @@ The bundle here implements a language syntax, some snippets, and some compile/fo
 [ret]           A return statement with optional return value.
 
 === Commands
-[Cmd-R]         Compile and run the current file.
-[Cmd-B]         Build the current project using gomake.
-[Cmd-Opt-B]     Build the current project as a package using gomake & gopack.
 [Cmd-K]         Compile the current file.
+[Cmd-R]         Compile and run the current file.
+[Cmd-B]         Build the current package using "go install".
+[Cmd-T]         Launch the unittests for the current package using "go test".
 [Ctrl-Shift-H]  Reformat the document according to the Go style guidelines using gofmt.
 [Ctrl-H]        Show the Go HTML documentation for the currently-selected symbol.
 
