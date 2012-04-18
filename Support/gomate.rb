@@ -60,7 +60,7 @@ module Go
     args.push(name)
     args.push(opts)
 
-    TextMate::Executor.run(go, "command", *args) do |str, type|
+    TextMate::Executor.run("go", command, *args) do |str, type|
       Go::link_errs(str, type)
     end
   end
