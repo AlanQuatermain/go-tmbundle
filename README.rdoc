@@ -8,7 +8,7 @@ Ensure you've got a recent copy of git installed, then in a Terminal window do:
 
     mkdir "$HOME/Library/Application Support/Avian/Bundles"
     cd "$HOME/Library/Application Support/Avian/Bundles"
-    git checkout git://github.com/sdefresne/Go.tmbundle.git
+    git clone git://github.com/sdefresne/Go.tmbundle.git
 
 === Features
 The bundle here implements a language syntax, some snippets, and some compile/format/documentation commands for the Go language (http://golang.org/). Much of the current infrastructure was created by Martin Kühl (http://github.com/mkhl), who is a significantly more seasoned TextMate bundle developer than I, and to whom I am eternally grateful.
