@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>${1:name}${1/(.+)/ := /}new(${0:type})</string>
+	<string>${1:name}${1/(.+)/ := /}new(${2:type})</string>
 	<key>name</key>
 	<string>New</string>
 	<key>scope</key>
