@@ -214,7 +214,7 @@
 					<key>match</key>
 					<string>\*/.*\n</string>
 					<key>name</key>
-					<string>invalid.illegal.stray-commend-end.go</string>
+					<string>invalid.illegal.stray-comment-end.go</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -222,36 +222,58 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
+							<string>punctuation.definition.comment.go</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
 							<string>meta.toc-list.banner.line.go</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^// =(\s*.*?)\s*=\s*$\n?</string>
+					<string>^(//) =(\s*.*?)\s*=\s*$\n?</string>
 					<key>name</key>
 					<string>comment.line.double-slash.banner.go</string>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>//</string>
+					<string>(^[ \t]+)?(?=//)</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>0</key>
+						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.go</string>
+							<string>punctuation.whitespace.comment.leading.go</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$\n?</string>
-					<key>name</key>
-					<string>comment.line.double-slash.go</string>
+					<string>(?!\G)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>match</key>
-							<string>(?&gt;\\\s*\n)</string>
+							<key>begin</key>
+							<string>//</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.go</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
 							<key>name</key>
-							<string>punctuation.separator.continuation.go</string>
+							<string>comment.line.double-slash.go</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>match</key>
+									<string>(?&gt;\\\s*\n)</string>
+									<key>name</key>
+									<string>punctuation.separator.continuation.go</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 				</dict>
