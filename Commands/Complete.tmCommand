@@ -111,6 +111,8 @@ else
 end</string>
 	<key>fallbackInput</key>
 	<string>word</string>
+	<key>hideFromUser</key>
+	<true/>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
