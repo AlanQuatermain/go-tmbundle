@@ -54,7 +54,7 @@ module Go
 
     args = options[:args] ? options[:args] : []
     name = get_target_name(ENV['TM_FILEPATH'], options[:scope])
-    opts = {:interactive_input => false, :use_hashbang => false}
+    opts = {:interactive_input => false, :use_hashbang => false, :version_args => ["version"], :version_regex => /\Ago version (.*)/}
     opts[:verb] = options[:verb] if options[:verb]
 
     args.push(name)
