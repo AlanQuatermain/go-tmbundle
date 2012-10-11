@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Folding</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>settings</key>
+	<dict>
+		<key>foldingStartMarker</key>
+		<string>(?x)
+	/\*\*(?!\*)                             # opening C-style comment with 2 asterisks but no third later on
+	|                                       # OR
+	^                                       # start of line...
+	(?!                                     # ...which does NOT contain...
+		[^{(]*?//                           #    ...a possible bunch of non-opening-braces, followed by a C++ comment
+	  |                                     #    OR
+		[^{(]*?/\*(?!.*?\*/.*?[{(])         #    ...a possible bunch of non-opening-braces, followed by a C comment with no ending
+	)
+	.*?                                     # ...any characters (or none)...
+	[{(]\s*                                 # ...followed by an open brace and zero or more whitespace...
+	(                                       # ...followed by...
+		$                                   #    ...the end of line...
+	  |                                     #    OR
+		//                                  #    ...a C++ comment...
+	  |                                     #    OR
+		/\*(?!.*?\*/.*\S)                   #    ...a C comment, so long as no non-whitespace chars follow it..
+	)
+    </string>
+		<key>foldingStopMarker</key>
+		<string>(?&lt;!\*)\*\*/|^\s*[})]</string>
+	</dict>
+	<key>uuid</key>
+	<string>21783905-48ED-47DD-9EBA-0DF5FDBA1F4E</string>
+</dict>
+</plist>
