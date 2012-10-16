@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>${1:name}${1/(.+)/ := /}make(${0:reftype})</string>
+	<string>${1:name}${1/(.+)/ := /}make(${2:reftype})</string>
 	<key>name</key>
 	<string>Make</string>
 	<key>scope</key>
