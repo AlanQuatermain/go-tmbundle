@@ -19,12 +19,22 @@ module Go
   end
 
   def Go::link_errs(str, type)
-    str.gsub!(/^(.+):(\d+):\s+(.+)$/) do
-      file, line, msg = $1, $2, $3
-      text = "<a href=\"#{href(file, line)}\">"
-      text << "#{htmlize(File.basename(file))}:#{line}</a>"
-      text << ": <span class=\"err\">#{htmlize(msg)}</span><br>"
-      text
+    if str.count(':') == 2
+      str.gsub!(/^(.+):(\d+):\s+(.+)$/) do
+        file, line, msg = $1, $2, $3
+        text = "<a href=\"#{href(File.basename(file), line)}\">"
+        text << "#{htmlize(File.basename(file))}:#{line}</a>"
+        text << ": <span class=\"err\">#{htmlize(msg)}</span><br>"
+        text
+      end
+    else
+      str.gsub!(/^(.+):(\d+):(\d+):\s+(.+)$/) do
+        file, line, col, msg = $1, $2, $3, $4
+        text = "<a href=\"#{href(File.basename(file), line)}\">"
+        text << "#{htmlize(File.basename(file))}:#{line}</a>"
+        text << ": <span class=\"err\">#{htmlize(msg)}</span><br>"
+        text
+      end
     end
   end
 end

@@ -8,19 +8,27 @@
 	<string>#!/usr/bin/env ruby
 
 require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
-Go::launch "build", :verb =&gt; "Compiling", :scope =&gt; :file
+Go::go "build", :verb =&gt; "Compiling"
 </string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@k</string>
 	<key>name</key>
 	<string>Compile</string>
-	<key>output</key>
-	<string>showAsHTML</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>
 	<string>73628139-0077-4F09-9B72-77546D7C2D2D</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

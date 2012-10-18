@@ -2,39 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
 	<key>command</key>
-	<string>#!/bin/bash
+	<string>#!/usr/bin/env ruby
 
-source "$TM_SUPPORT_PATH/lib/bash_init.sh"
-source "$TM_SUPPORT_PATH/lib/webpreview.sh"
-
-require_cmd godoc
-
-word="$(cat)"
-terms="$(echo "${word}"|sed 's:\.: :g')"
-
-if godoc ${terms} &gt;/dev/null 2&gt;&amp;1; then
-  html_header "Documentation for “${word}”"
-  godoc -html ${terms}
-  html_footer
-  exit_show_html
-else
-  echo "Couldn't find documentation for “${word}”"
-fi
+require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
+Go::godoc
 </string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>input</key>
 	<string>selection</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^h</string>
 	<key>name</key>
 	<string>Documentation for Word / Selection</string>
-	<key>output</key>
-	<string>showAsTooltip</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>toolTip</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>
 	<string>7BCFCFC8-9152-4638-8436-E17B0C754C8D</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

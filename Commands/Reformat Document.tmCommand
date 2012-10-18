@@ -8,19 +8,27 @@
 	<string>#!/usr/bin/env ruby
 
 require "#{ENV['TM_BUNDLE_SUPPORT']}/gomate"
-Go::format
+Go::gofmt
 </string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^H</string>
 	<key>name</key>
 	<string>Reformat Document</string>
-	<key>output</key>
+	<key>outputCaret</key>
+	<string>interpolateByLine</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
 	<string>replaceDocument</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>
 	<string>B0271A46-F6EF-4D2F-95A6-EC067E69155C</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>

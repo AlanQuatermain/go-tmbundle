@@ -2,82 +2,105 @@
 
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/exit_codes"
+require "#{ENV['TM_SUPPORT_PATH']}/lib/ui"
+require "#{ENV['TM_SUPPORT_PATH']}/lib/web_preview"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/executor"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/require_cmd"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/save_current_document"
 require "#{ENV['TM_BUNDLE_SUPPORT']}/goerrs"
 
+# TextMate's special GOPATH used in .tm_properties files prepended to the environment's GOPATH
+ENV['GOPATH'] = (ENV.has_key?('TM_GOPATH') ? ENV['TM_GOPATH'] : '') +
+                (ENV.has_key?('GOPATH') ? ':' + ENV['GOPATH'] : '')
+
 module Go
-  def Go::get_package_name(filename)
-    if ENV['GOPATH']
-      dirname = File.dirname File.expand_path filename
-      package = ENV['GOPATH'].split(/:/).map do |path|
-        root = (File.expand_path path) + '/src/'
-        dirname[root.length..-1] if dirname.start_with? root
-      end.compact.first
-      return package if package
-    end
-
-    title = "Can't find package name for file"
-    TextMate::HTMLOutput.show(:title => title) do |io|
-      gopath = "<code>GOPATH</code>"
-      io << "<p>The current #{gopath} is:</p>"
-      io << "<blockquote>"
-      (ENV['GOPATH'] or '').split(/:/).each do |path|
-        io << htmlize(path + "\n")
-      end
-      io << "</blockquote>"
-      io << "<p>Please consult <a href=\"http://golang.org/doc/code.html#GOPATH\">"
-      io << "#{gopath} and workspaces</a> in the Go documentation.</p>"
-    end
-    TextMate.exit_show_html
-  end
-
-  def Go::get_target_name(filename, scope)
-    case scope
-    when :package
-      package = get_package_name(filename)
-      ENV['TM_DISPLAYNAME'] = package
-      return package
-    else
-      return filename
-    end
-  end
-
-  def Go::execute(tool, options={})
-  end
-
-  def Go::launch(command, options={})
-    TextMate.require_cmd("go")
-    TextMate.save_current_document("go")
+  def Go::go(command, options={})
+    # TextMate's special TM_GO or expect 'go' on PATH
+    go_cmd = ENV['TM_GO'] || 'go'
+    TextMate.require_cmd(go_cmd)
+    TextMate.save_current_document('go')
     TextMate::Executor.make_project_master_current_document
 
     args = options[:args] ? options[:args] : []
-    name = get_target_name(ENV['TM_FILEPATH'], options[:scope])
-    opts = {:interactive_input => false, :use_hashbang => false, :version_args => ["version"], :version_regex => /\Ago version (.*)/}
+    opts = {:interactive_input => false, :use_hashbang => false, :version_args => ['version'], :version_regex => /\Ago version (.*)/}
     opts[:verb] = options[:verb] if options[:verb]
 
-    args.push(name)
+    # At this time, we will always run 'go' against a single file.  In the future there may be new
+    # commands that will invalidate this but until then, might as well start simple.
+    args.push(ENV['TM_FILEPATH'])
     args.push(opts)
 
-    TextMate::Executor.run("go", command, *args) do |str, type|
+    TextMate::Executor.run(go_cmd, command, *args) do |str, type|
       Go::link_errs(str, type)
     end
   end
 
-  def Go::format
-    TextMate.require_cmd("gofmt")
-    TextMate.save_current_document("go")
+  def Go::godoc
+    # TextMate's special TM_GODOC or expect 'godoc' on PATH
+    godoc_cmd = ENV['TM_GODOC'] || 'godoc'
+    term = STDIN.read.strip
+    TextMate.require_cmd(godoc_cmd)
+    TextMate.save_current_document('go')
+    TextMate::Executor.make_project_master_current_document
+
+    if term.nil? || term.empty?
+      term = TextMate::UI.request_string( :title => 'Go Documentation Search',
+                                          :prompt => 'Enter a term to search for:',
+                                          :button1 => 'Search')
+    end
+
+    TextMate.exit_show_tool_tip('Please select a term to look up.') if term.nil? || term.empty?
+
+    args = []
+    args.push(godoc_cmd)
+    args.push('-html')
+    args.push('-tabwidth=0')
+    args.concat term.split('.')
+    args.push({:interactive_input => false, :use_hashbang => false})
+
+    out, err = TextMate::Process.run(*args)
+
+    if err.nil? || err == ''
+      html_header("Documentation for #{term}", "go")
+      puts out
+      html_footer
+      TextMate.exit_show_html
+    else
+      TextMate.exit_show_tool_tip(err)
+    end
+  end
+
+  def Go::gofmt
+    # TextMate's special TM_GOFMT or expect 'gofmt' on PATH
+    gofmt_cmd = ENV['TM_GOFMT'] || 'gofmt'
+    TextMate.require_cmd(gofmt_cmd)
+    TextMate.save_current_document('go')
     TextMate::Executor.make_project_master_current_document
 
     args = []
-    args.push("gofmt")
+    args.push(gofmt_cmd)
     args.push("-tabwidth=#{ENV['TM_TAB_SIZE']}")
-    args.push("-tabs=#{ENV['TM_SOFT_TABS'] != 'YES'}")
+    if ENV['TM_SOFT_TABS'] && ENV['TM_SOFT_TABS'] == 'YES'
+      args.push('-tabs=true')
+    else
+      args.push('-tabs=false')
+    end
     args.push(ENV['TM_FILEPATH'])
     args.push({:interactive_input => false, :use_hashbang => false})
-    TextMate::Process.run(*args) do |str, type|
-      STDOUT << str if type == :out
+
+    out, err = TextMate::Process.run(*args)
+
+    if err.nil? || err == ''
+      puts out
+    else
+      html_header("Formatting \"#{ENV['TM_FILENAME']}\"...", "go",
+                  # html_head below is used to style the error lines like those displayed when a compiler error occurs
+                  :html_head => '<style type="text/css">.err { color: red; } pre { font-style: normal; white-space: normal; }</style>')
+      puts '<pre>'
+      puts Go::link_errs(err, :err)
+      puts '</pre>'
+      html_footer
+      TextMate.exit_show_html
     end
   end
 end
