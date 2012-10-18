@@ -1,3 +1,6 @@
+=== 1.3.1 / 2012-10-18
+* Fixed some problems with the indentation regexes.
+
 === 1.3 / 2011-11-22
 * Includes a wrapper for +gotest+ on Cmd-Opt-T.
 * Imported some community additions and bugfixes to bring compatibility with OS X 10.7 and TextMate 1.5.1:
