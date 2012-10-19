@@ -24,6 +24,21 @@ Go::gofmt
 	<string>text</string>
 	<key>outputLocation</key>
 	<string>replaceDocument</string>
+	<key>requiredCommands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>gofmt</string>
+			<key>locations</key>
+			<array>
+				<string>/opt/local/bin/gofmt</string>
+				<string>/usr/local/bin/gofmt</string>
+				<string>/usr/local/go/bin/gofmt</string>
+			</array>
+			<key>variable</key>
+			<string>TM_GOFMT</string>
+		</dict>
+	</array>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>

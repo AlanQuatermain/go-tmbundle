@@ -24,6 +24,21 @@ Go::go "test", :verb =&gt; "Testing"
 	<string>html</string>
 	<key>outputLocation</key>
 	<string>newWindow</string>
+	<key>requiredCommands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>go</string>
+			<key>locations</key>
+			<array>
+				<string>/opt/local/bin/go</string>
+				<string>/usr/local/bin/go</string>
+				<string>/usr/local/go/bin/go</string>
+			</array>
+			<key>variable</key>
+			<string>TM_GO</string>
+		</dict>
+	</array>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>

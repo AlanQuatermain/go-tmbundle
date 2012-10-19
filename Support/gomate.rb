@@ -5,7 +5,6 @@ require "#{ENV['TM_SUPPORT_PATH']}/lib/exit_codes"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/ui"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/web_preview"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/executor"
-require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/require_cmd"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/save_current_document"
 require "#{ENV['TM_BUNDLE_SUPPORT']}/goerrs"
 
@@ -17,7 +16,6 @@ module Go
   def Go::go(command, options={})
     # TextMate's special TM_GO or expect 'go' on PATH
     go_cmd = ENV['TM_GO'] || 'go'
-    TextMate.require_cmd(go_cmd)
     TextMate.save_current_document('go')
     TextMate::Executor.make_project_master_current_document
 
@@ -39,7 +37,6 @@ module Go
     # TextMate's special TM_GODOC or expect 'godoc' on PATH
     godoc_cmd = ENV['TM_GODOC'] || 'godoc'
     term = STDIN.read.strip
-    TextMate.require_cmd(godoc_cmd)
     TextMate.save_current_document('go')
     TextMate::Executor.make_project_master_current_document
 
@@ -73,7 +70,6 @@ module Go
   def Go::gofmt
     # TextMate's special TM_GOFMT or expect 'gofmt' on PATH
     gofmt_cmd = ENV['TM_GOFMT'] || 'gofmt'
-    TextMate.require_cmd(gofmt_cmd)
     TextMate.save_current_document('go')
     TextMate::Executor.make_project_master_current_document
 

@@ -26,6 +26,21 @@ Go::godoc
 	<string>html</string>
 	<key>outputLocation</key>
 	<string>toolTip</string>
+	<key>requiredCommands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>godoc</string>
+			<key>locations</key>
+			<array>
+				<string>/opt/local/bin/godoc</string>
+				<string>/usr/local/bin/godoc</string>
+				<string>/usr/local/go/bin/godoc</string>
+			</array>
+			<key>variable</key>
+			<string>TM_GODOC</string>
+		</dict>
+	</array>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>
