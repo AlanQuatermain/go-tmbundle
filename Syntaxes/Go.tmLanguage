@@ -467,30 +467,36 @@
 		<dict>
 			<key>begin</key>
 			<string>(?x)
-    	            ^[[:blank:]]*(func)\s*
-    	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
-    	            (?: \( ((?:[\[\]\w\d\s\/,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )             # required braces for parameters (even if empty)
-    	            \s*
-    	            (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
+    	            (^[[:blank:]]*(func)\s*
+    	             (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
+    	             (?: \( ((?:[\[\]\w\d\s\/,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )             # required braces for parameters (even if empty)
+    	             \s*
+    	             (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
+                    )
     	    </string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.control.go</string>
+					<string>meta.function.declaration.go</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.go</string>
+					<string>keyword.control.go</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameters.go</string>
+					<string>entity.name.function.go</string>
 				</dict>
 				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameters.go</string>
+				</dict>
+				<key>5</key>
 				<dict>
 					<key>name</key>
 					<string>variable.return-types.go</string>
@@ -524,43 +530,50 @@
 		<dict>
 			<key>begin</key>
 			<string>(?x)
-    	            (func)\s*
     	            (
-    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)\s+ )                # receiver variable declarations, in brackets
-    	            (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
-    	            )
-    	            (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )               # required braces for parameters (even if empty)
-    	            \s*
-    	            (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
+                     (func)\s*
+    	             (
+    	             (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)\s+ )                # receiver variable declarations, in brackets
+    	             (?: ([[:alpha:]_][[:alnum:]_]*)? )          # name of function is optional
+    	             )
+    	             (?: \( ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*)? \) )               # required braces for parameters (even if empty)
+    	             \s*
+    	             (?: \(? ((?:[\[\]\w\d\s,._*&amp;&lt;&gt;-]|(?:interface\{\}))*) \)? )?             # optional return types, optionally within braces
+                    )
     	    </string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.control.go</string>
+					<string>meta.function.receiver.declaration.go</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.go.full-name</string>
+					<string>keyword.control.go</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>variable.receiver.go</string>
+					<string>entity.name.function.go.full-name</string>
 				</dict>
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.go.name</string>
+					<string>variable.receiver.go</string>
 				</dict>
 				<key>5</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameters.go</string>
+					<string>entity.name.function.go.name</string>
 				</dict>
 				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameters.go</string>
+				</dict>
+				<key>7</key>
 				<dict>
 					<key>name</key>
 					<string>variable.return-types.go</string>
