@@ -11,28 +11,6 @@
 	</array>
 	<key>firstLineMatch</key>
 	<string>(?i)-[*]-\s*(mode:)?\s*go\s*-[*]-</string>
-	<key>foldingStartMarker</key>
-	<string>(?x)
-          /\*\*(?!\*)                           # opening C-style comment with 2 asterisks but no third later on
-         |                                      # OR
-          ^                                     # start of line...
-           (?!                                  # ...which does NOT contain...
-              [^{(]*?//                         #    ...a possible bunch of non-opening-braces, followed by a C++ comment
-             |                                  #    OR
-              [^{(]*?/\*(?!.*?\*/.*?[{(])       #    ...a possible bunch of non-opening-braces, followed by a C comment with no ending
-           )
-           .*?                                  # ...any characters (or none)...
-           [{(]\s*                              # ...followed by an open brace and zero or more whitespace...
-           (                                    # ...followed by...
-            $                                   #    ...the end of line...
-             |                                  #    OR
-            //                                  #    ...a C++ comment...
-             |                                  #    OR
-            /\*(?!.*?\*/.*\S)                   #    ...a C comment, so long as no non-whitespace chars follow it..
-           )
-    </string>
-	<key>foldingStopMarker</key>
-	<string>(?&lt;!\*)\*\*/|^\s*[})]</string>
 	<key>keyEquivalent</key>
 	<string>^~G</string>
 	<key>name</key>
@@ -150,8 +128,24 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.begin.go</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.end.go</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.block.go</string>
 			<key>patterns</key>
@@ -214,7 +208,7 @@
 					<key>match</key>
 					<string>\*/.*\n</string>
 					<key>name</key>
-					<string>invalid.illegal.stray-commend-end.go</string>
+					<string>invalid.illegal.stray-comment-end.go</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -222,36 +216,58 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
+							<string>punctuation.definition.comment.go</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
 							<string>meta.toc-list.banner.line.go</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^// =(\s*.*?)\s*=\s*$\n?</string>
+					<string>^(//) =(\s*.*?)\s*=\s*$\n?</string>
 					<key>name</key>
 					<string>comment.line.double-slash.banner.go</string>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>//</string>
+					<string>(^[ \t]+)?(?=//)</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>0</key>
+						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.go</string>
+							<string>punctuation.whitespace.comment.leading.go</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$\n?</string>
-					<key>name</key>
-					<string>comment.line.double-slash.go</string>
+					<string>(?!\G)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>match</key>
-							<string>(?&gt;\\\s*\n)</string>
+							<key>begin</key>
+							<string>//</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.go</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
 							<key>name</key>
-							<string>punctuation.separator.continuation.go</string>
+							<string>comment.line.double-slash.go</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>match</key>
+									<string>(?&gt;\\\s*\n)</string>
+									<key>name</key>
+									<string>punctuation.separator.continuation.go</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 				</dict>
@@ -270,8 +286,24 @@
 		<dict>
 			<key>begin</key>
 			<string>\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.parens.begin.go</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.parens.end.go</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.parens.go</string>
 			<key>patterns</key>
@@ -290,8 +322,24 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.function-block.begin.go</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.function-block.end.go</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.block.go</string>
 			<key>patterns</key>
