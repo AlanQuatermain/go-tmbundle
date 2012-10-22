@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveActiveFile</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby -Ku
 require ENV['TM_SUPPORT_PATH'] + '/lib/ui.rb'
@@ -15,16 +15,14 @@ require ENV['TM_SUPPORT_PATH'] + "/lib/web_preview"
 TextMate.require_cmd("gocode")
 
 # current document
-document = STDIN.readlines
+document = []
+File.open(ENV['TM_FILEPATH'], "r+") do |file|
+  document = file.readlines
+end
 
 # byte offset of cursor position from the beginning of file
 cursor = document[ 0, ENV['TM_LINE_NUMBER'].to_i - 1].join().length + ENV['TM_LINE_INDEX'].to_i
-
-output = IO.popen("gocode -f=csv autocomplete #{cursor}", "w+") do |pipe|
-  pipe.puts document.join()
-  pipe.close_write
-  pipe.read
-end
+output = `gocode -f=csv -in=#{e_sh ENV['TM_FILEPATH']} autocomplete #{cursor}`
 
 # quit if no completions found
 TextMate.exit_show_tool_tip("No completions found.") if output.length == 0
@@ -106,7 +104,10 @@ options = { :extra_chars =&gt; "_", :case_insensitive =&gt; false }
 if hash.length == 1
   word = ENV['TM_CURRENT_WORD'] || ""
   snippet = hash[0]["match"].gsub(/^#{Regexp.escape(word)}/, "") + hash[0]["insert"]
-  `"$DIALOG" x-insert --snippet #{e_sh snippet}`
+  #`"$DIALOG" x-insert --snippet #{e_sh snippet}`
+  #full = document.join()
+  #print e_sn(full[0..cursor]) + "$0" + e_sn(full[cursor+1..-1])
+  TextMate.exit_insert_snippet( snippet )
 else
   TextMate::UI.complete( hash , options )
 end</string>
@@ -115,16 +116,24 @@ end</string>
 	<key>hideFromUser</key>
 	<string>true</string>
 	<key>input</key>
-	<string>document</string>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string></string>
 	<key>name</key>
 	<string>Complete</string>
-	<key>output</key>
-	<string>discard</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>atCaret</string>
 	<key>scope</key>
 	<string>source.go</string>
 	<key>uuid</key>
 	<string>FE908865-7729-4926-9FAC-2D54895BEA48</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
