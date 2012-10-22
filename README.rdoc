@@ -1,6 +1,6 @@
 == Go
 (a TextMate 2 language bundle)
-Version 2.0
+Version 2.0.1
 
 === Installation
 

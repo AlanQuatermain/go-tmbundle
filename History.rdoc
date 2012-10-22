@@ -1,3 +1,6 @@
+=== 2.0.1 / 2012-10-22
+* Fixed code-completion with a single result: no longer puts single completions at end of file.
+
 === 2.0 / 2012-10-22
 * Merged in a whole lot of work from other folks, primarily bringing in full support for Go 1.0 and TextMate 2:
 

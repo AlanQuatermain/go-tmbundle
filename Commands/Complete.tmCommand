@@ -10,6 +10,7 @@ require ENV['TM_SUPPORT_PATH'] + '/lib/ui.rb'
 require ENV['TM_SUPPORT_PATH'] + "/lib/escape.rb"
 require ENV['TM_SUPPORT_PATH'] + "/lib/tm/require_cmd.rb"
 require ENV['TM_SUPPORT_PATH'] + "/lib/tm/htmloutput.rb"
+require ENV['TM_SUPPORT_PATH'] + "/lib/web_preview"
 
 TextMate.require_cmd("gocode")
 
@@ -105,14 +106,14 @@ options = { :extra_chars =&gt; "_", :case_insensitive =&gt; false }
 if hash.length == 1
   word = ENV['TM_CURRENT_WORD'] || ""
   snippet = hash[0]["match"].gsub(/^#{Regexp.escape(word)}/, "") + hash[0]["insert"]
-  TextMate.exit_insert_snippet( snippet )
+  `"$DIALOG" x-insert --snippet #{e_sh snippet}`
 else
   TextMate::UI.complete( hash , options )
 end</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>hideFromUser</key>
-	<true/>
+	<string>true</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
