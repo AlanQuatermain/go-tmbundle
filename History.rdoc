@@ -1,3 +1,48 @@
+=== 2.0 / 2012-10-22
+* Merged in a whole lot of work from other folks, primarily bringing in full support for Go 1.0 and TextMate 2:
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/1f182d955b56f6ccb308c94f4b1e1463ae99a782]
+    *sdefresne* <em>Support for Go version 1.0</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/a2297b561653a5cc2874c0ee106715795a92ad99]
+    *sdefresne* <em>Update documentation</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/abb8331d64817241a23b8668e2354e983d803c91]
+    *liuyork* <em>Fix the mistake when call "go" CMD.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/789bb3951f6e82241ff57cfb4877265191b0f081]
+    *AlekSi* <em>Fix important typo.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/7d7e399afecd114dfc39fe8f8bbc15c883db4c39]
+    *AlekSi* <em>It's 'git clone'.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/cf5c2528bb70747301a9e694b55ca376fa2f12c7]
+    *mkhl* <em>Merge "Deferred Function Call" into "Deferred Call".</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/76199f73304285b2e03b25192e129f9744d30ae0]
+    *mkhl* <em>Adapt "Goroutine Call" in the spirit of "Deferred Call".</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/48287f71203d6c3c87c2bca96a62752b6d33bd72]
+    *infininight* <em>Improve comment matches.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/7232ee66407a894f94358e23c6a32aad584a5ca7]
+    *infininight* <em>Improve scoping of braces and parens, remove outdated snippet.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/cb99b8da8a12b328f8c65885a82d569917798202]
+    *infininight* <em>Hide completion command in the menu.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/8d019dd8126334cf4801b8fcf151c522d4fef58f]
+    *infininight* <em>Move folding settings.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/0ff2ffb4260f8332c3e1136d58e6b5122453e26b]
+    *infininight* <em>Correct version lookup and parsing.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/ca55b4ce28b7badd56e3df69a56b6e8f51fce589]
+    *whitlockjc* <em>Updated all commands to use TM_* variables to locate necessary executables and TM_GOPATH.</em>
+
+[https://github.com/AlanQuatermain/go-tmbundle/commit/1f69fb08bc84267ecb7b75725ddebe5a879d8bea]
+    *infininight* <em>Start using requiredCommands to locate go.</em>
+
 === 1.3.2 / 2012-10-19
 * Added Symbol List support for functions and received functions (object methods).
 
