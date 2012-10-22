@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>defer func(${1:params}) {
+	<string>defer ${1:func(${2:params}) {
 	${0:// body}
-}(${2:${1/(.+)?/(?1:values)/}})</string>
+\}(${3:${2/(.+)?/(?1:values)/}})}</string>
 	<key>name</key>
 	<string>Deferred Goroutine Call</string>
 	<key>scope</key>
