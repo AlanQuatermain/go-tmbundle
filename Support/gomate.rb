@@ -77,9 +77,9 @@ module Go
     args.push(gofmt_cmd)
     args.push("-tabwidth=#{ENV['TM_TAB_SIZE']}")
     if ENV['TM_SOFT_TABS'] && ENV['TM_SOFT_TABS'] == 'YES'
-      args.push('-tabs=true')
-    else
       args.push('-tabs=false')
+    else
+      args.push('-tabs=true')
     end
     args.push(ENV['TM_FILEPATH'])
     args.push({:interactive_input => false, :use_hashbang => false})
