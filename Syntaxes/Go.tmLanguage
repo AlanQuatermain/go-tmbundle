@@ -373,7 +373,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\s*)\b(new|c(lose(d)?|ap)|p(anic(ln)?|rint(ln)?)|len|make)(?:\b|\()</string>
+					<string>(\s*)\b(new|c(lose|ap)|p(anic|rint(ln)?)|len|make|append)(?:\b|\()</string>
 				</dict>
 				<dict>
 					<key>include</key>
