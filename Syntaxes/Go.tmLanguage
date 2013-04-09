@@ -449,21 +449,28 @@
 				<dict>
 					<key>captures</key>
 					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
 						<key>1</key>
 						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>match</key>
+									<string>[[:alpha:]_][[:alnum:]_]*</string>
+									<key>name</key>
+									<string>variable.other.go</string>
+								</dict>
+							</array>
+						</dict>
+						<key>2</key>
+						<dict>
 							<key>name</key>
-							<string>keyword.operator.initialize.go</string>
+							<string>keyword.operator.go</string>
 						</dict>
 					</dict>
 					<key>comment</key>
 					<string>This matches the 'x := 0' style of variable declaration.</string>
 					<key>match</key>
-					<string>(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*\s*(:=)</string>
+					<string>((?:[[:alpha:]_][[:alnum:]_]*)(?:\s*,\s+[[:alpha:]_][[:alnum:]_]*)*)\s*(:=)</string>
 					<key>name</key>
 					<string>meta.initialization.short.go</string>
 				</dict>
