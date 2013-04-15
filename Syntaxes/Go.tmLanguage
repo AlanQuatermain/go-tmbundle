@@ -428,21 +428,28 @@
 				<dict>
 					<key>captures</key>
 					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.go</string>
-						</dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>keyword.control.go</string>
 						</dict>
+						<key>2</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>match</key>
+									<string>[[:alpha:]_][[:alnum:]_]*</string>
+									<key>name</key>
+									<string>variable.other.go</string>
+								</dict>
+							</array>
+						</dict>
 					</dict>
 					<key>comment</key>
-					<string>This matches the 'var x int = 0' style of variable declaration.</string>
+					<string>This matches the 'var x' style of variable declaration.</string>
 					<key>match</key>
-					<string>^[[:blank:]]*(var)\s+(?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*</string>
+					<string>^[[:blank:]]*(var)\s+((?:[[:alpha:]_][[:alnum:]_]*)(?:,\s+[[:alpha:]_][[:alnum:]_]*)*)</string>
 					<key>name</key>
 					<string>meta.initialization.explicit.go</string>
 				</dict>
@@ -468,7 +475,7 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>This matches the 'x := 0' style of variable declaration.</string>
+					<string>This matches the 'x :=' style of variable declaration.</string>
 					<key>match</key>
 					<string>((?:[[:alpha:]_][[:alnum:]_]*)(?:\s*,\s+[[:alpha:]_][[:alnum:]_]*)*)\s*(:=)</string>
 					<key>name</key>
