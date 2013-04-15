@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>if ${1:err} != nil {
+  ${2:log.Fatal($1)}
+}${0}</string>
+	<key>name</key>
+	<string>If err</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>ife</string>
+	<key>uuid</key>
+	<string>8C0BE817-6C6E-4927-85E5-9DA3FB8A7000</string>
+</dict>
+</plist>
