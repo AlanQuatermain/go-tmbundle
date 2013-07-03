@@ -16,7 +16,7 @@ module Go
   def Go::go(command, options={})
     # TextMate's special TM_GO or expect 'go' on PATH
     go_cmd = ENV['TM_GO'] || 'go'
-    TextMate.save_current_document('go')
+    TextMate.save_if_untitled('go')
     TextMate::Executor.make_project_master_current_document
 
     args = options[:args] ? options[:args] : []
@@ -37,8 +37,7 @@ module Go
     # TextMate's special TM_GODOC or expect 'godoc' on PATH
     godoc_cmd = ENV['TM_GODOC'] || 'godoc'
     term = STDIN.read.strip
-    TextMate.save_current_document('go')
-    TextMate::Executor.make_project_master_current_document
+    TextMate.save_if_untitled('go')
 
     if term.nil? || term.empty?
       term = TextMate::UI.request_string( :title => 'Go Documentation Search',
@@ -53,7 +52,6 @@ module Go
     args.push('-html')
     args.push('-tabwidth=0')
     args.concat term.split('.')
-    args.push({:interactive_input => false, :use_hashbang => false})
 
     out, err = TextMate::Process.run(*args)
 
@@ -70,8 +68,7 @@ module Go
   def Go::gofmt
     # TextMate's special TM_GOFMT or expect 'gofmt' on PATH
     gofmt_cmd = ENV['TM_GOFMT'] || 'gofmt'
-    TextMate.save_current_document('go')
-    TextMate::Executor.make_project_master_current_document
+    TextMate.save_if_untitled('go')
 
     args = []
     args.push(gofmt_cmd)
@@ -82,7 +79,6 @@ module Go
       args.push('-tabs=true')
     end
     args.push(ENV['TM_FILEPATH'])
-    args.push({:interactive_input => false, :use_hashbang => false})
 
     out, err = TextMate::Process.run(*args)
 
