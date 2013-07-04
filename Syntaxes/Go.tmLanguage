@@ -555,15 +555,31 @@
 				</dict>
 				<key>4</key>
 				<dict>
-					<key>name</key>
-					<string>variable.parameters.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[[:alpha:]_][[:alnum:]_]*</string>
+							<key>name</key>
+							<string>variable.parameters.go</string>
+						</dict>
+					</array>
 				</dict>
 				<key>5</key>
 				<dict>
-					<key>name</key>
-					<string>variable.return-types.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[[:alpha:]_][[:alnum:]_]*</string>
+							<key>name</key>
+							<string>variable.return-types.go</string>
+						</dict>
+					</array>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>We scope all parenthesized alpha-numeric text as variable.parameters.go and variable.return-types.go, which is a bit lazy, as some of it is storage.type.</string>
 			<key>end</key>
 			<string>(?&lt;=\})</string>
 			<key>name</key>
@@ -622,8 +638,15 @@
 				</dict>
 				<key>4</key>
 				<dict>
-					<key>name</key>
-					<string>variable.receiver.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[[:alpha:]_][[:alnum:]_]*</string>
+							<key>name</key>
+							<string>variable.receiver.go</string>
+						</dict>
+					</array>
 				</dict>
 				<key>5</key>
 				<dict>
@@ -632,13 +655,27 @@
 				</dict>
 				<key>6</key>
 				<dict>
-					<key>name</key>
-					<string>variable.parameters.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[[:alpha:]_][[:alnum:]_]*</string>
+							<key>name</key>
+							<string>variable.parameters.go</string>
+						</dict>
+					</array>
 				</dict>
 				<key>7</key>
 				<dict>
-					<key>name</key>
-					<string>variable.return-types.go</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>[[:alpha:]_][[:alnum:]_]*</string>
+							<key>name</key>
+							<string>variable.return-types.go</string>
+						</dict>
+					</array>
 				</dict>
 			</dict>
 			<key>comment</key>
