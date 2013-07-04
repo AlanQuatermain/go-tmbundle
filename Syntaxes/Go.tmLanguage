@@ -512,9 +512,9 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\&lt;\-)|(\-\&gt;)</string>
+					<string>\&lt;\-</string>
 					<key>name</key>
-					<string>support.channel-operator.go</string>
+					<string>keyword.operator.channel.go</string>
 				</dict>
 			</array>
 		</dict>
