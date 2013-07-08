@@ -20,17 +20,22 @@ module Go
     TextMate::Executor.make_project_master_current_document
 
     args = options[:args] ? options[:args] : []
-    opts = {:interactive_input => false, :use_hashbang => false, :version_args => ['version'], :version_regex => /\Ago version (.*)/}
+    opts = {:use_hashbang => false, :version_args => ['version'], :version_regex => /\Ago version (.*)/}
     opts[:verb] = options[:verb] if options[:verb]
 
-    # At this time, we will always run 'go' against a single file.  In the future there may be new
-    # commands that will invalidate this but until then, might as well start simple.
-    args.push(ENV['TM_FILEPATH'])
+    if command == 'test' && ENV['TM_FILENAME'] =~ /(_test)?(\.go)$/
+      basename = $`
+      args.push("#{basename}.go")
+      args.push("#{basename}_test.go")
+      opts[:chdir] = ENV['TM_DIRECTORY']
+    else
+      # At this time, we will always run 'go' against a single file.  In the future there may be new
+      # commands that will invalidate this but until then, might as well start simple.
+      args.push(ENV['TM_FILEPATH'])
+    end
     args.push(opts)
 
-    TextMate::Executor.run(go_cmd, command, *args) do |str, type|
-      Go::link_errs(str, type)
-    end
+    TextMate::Executor.run(go_cmd, command, *args)
   end
 
   def Go::godoc

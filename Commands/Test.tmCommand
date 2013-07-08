@@ -17,9 +17,9 @@ Go::go "test", :verb =&gt; "Testing"
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>~@t</string>
+	<string>@R</string>
 	<key>name</key>
-	<string>Test</string>
+	<string>Run Tests</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
