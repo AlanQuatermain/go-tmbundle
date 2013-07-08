@@ -35,9 +35,7 @@ module Go
     end
     args.push(opts)
 
-    TextMate::Executor.run(go_cmd, command, *args) do |str, type|
-      Go::link_errs(str, type)
-    end
+    TextMate::Executor.run(go_cmd, command, *args)
   end
 
   def Go::godoc
