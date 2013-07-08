@@ -17,7 +17,7 @@ Go::go "build", :verb =&gt; "Compiling"
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>@k</string>
+	<string>@b</string>
 	<key>name</key>
 	<string>Compile</string>
 	<key>outputCaret</key>
