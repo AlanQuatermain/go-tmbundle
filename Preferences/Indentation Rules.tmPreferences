@@ -9,13 +9,25 @@
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>
-		<string>^(.*\*/)?(\s*\}([^}{"']*\{)?[;\s]*?|\s*\)([^)("']*\()?[;\s]*?|(?:\s*(case|default).*:))(//.*|/\*.*\*/\s*)*?</string>
+		<string>(?x)^
+      ( .* [*]/ )?
+         ( \s* \} ( [^}{"'\n]* \{ )? [;,()\s]*
+         | \s* \) ( [^)("'\n]* \( )? [;,\s]*
+         | ( \s* (case|default)\b .* )
+         )
+      ( \s* ( //.* | /[*] .*? [*]/ ) )*
+   \s* $</string>
 		<key>increaseIndentPattern</key>
-		<string>^(?:.*\*\/)?(?:(.*\{[^}"'\n]*)|(?:\s*(case|default).*:)|(.*\([^)"'\n]*))(\/\/.*|\/\*.*\*\/\s*)*?$</string>
-		<key>indentNextLinePattern</key>
-		<string>^(?!(.*[});:\w\d"'`])?\s*(\/\/|\/\*.*\*\/\s*$)).*[^\s;:{})"'`\w\d]\s*$</string>
-		<key>unIndentedLinePattern</key>
-		<string>^\s*((\/\*|\*\/|\/\/|import\b.*|package\b.*).*)?$</string>
+		<string>(?x)^
+      ( .* [*]/ )?
+         ( ( .* \{ [^}"'\n]* )
+         | ( .* \( [^)"'\n]* )
+         | ( \s* (case|default)\b .* )
+         )
+      ( \s* ( //.* | /[*] .*? [*]/ ) )*
+   \s* $</string>
+		<key>zeroIndentPattern</key>
+		<string>^\s*(?!default:)\w+:.*$</string>
 	</dict>
 	<key>uuid</key>
 	<string>160118A4-208D-4422-AFF0-0C21B5B78AAF</string>
