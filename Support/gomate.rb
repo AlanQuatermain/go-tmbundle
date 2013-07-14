@@ -24,6 +24,7 @@ module Go
 
     if command == 'test' && ENV['TM_FILENAME'] =~ /(_test)?(\.go)$/
       basename = $`
+      args.push("-v")
       args.push("#{basename}.go")
       args.push("#{basename}_test.go")
       opts[:chdir] = ENV['TM_DIRECTORY']
