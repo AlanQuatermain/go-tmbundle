@@ -27,7 +27,7 @@
       ( \s* ( //.* | /[*] .*? [*]/ ) )*
    \s* $</string>
 		<key>zeroIndentPattern</key>
-		<string>^\s*(?!default:)\w+:.*$</string>
+		<string>^(?!default:)\w+:.*$</string>
 	</dict>
 	<key>uuid</key>
 	<string>160118A4-208D-4422-AFF0-0C21B5B78AAF</string>
