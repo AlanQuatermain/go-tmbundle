@@ -11,7 +11,7 @@
 		<key>decreaseIndentPattern</key>
 		<string>(?x)^
       ( .* [*]/ )?
-         ( \s* \} ( [^}{"'\n]* \{ )? [;,()\s]*
+         ( \s* \} .*
          | \s* \) ( [^)("'\n]* \( )? [;,\s]*
          | ( \s* (case|default)\b .* )
          )
