@@ -8,6 +8,8 @@
 	<string>source.go</string>
 	<key>settings</key>
 	<dict>
+		<key>foldingIndentedBlockStart</key>
+		<string>^\s*(case|default)\b</string>
 		<key>foldingStartMarker</key>
 		<string>(?x)
 	/\*\*(?!\*)                             # opening C-style comment with 2 asterisks but no third later on

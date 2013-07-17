@@ -6,7 +6,6 @@ require "#{ENV['TM_SUPPORT_PATH']}/lib/ui"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/web_preview"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/executor"
 require "#{ENV['TM_SUPPORT_PATH']}/lib/tm/save_current_document"
-require "#{ENV['TM_BUNDLE_SUPPORT']}/goerrs"
 
 # TextMate's special GOPATH used in .tm_properties files prepended to the environment's GOPATH
 ENV['GOPATH'] = (ENV.has_key?('TM_GOPATH') ? ENV['TM_GOPATH'] : '') +
@@ -25,6 +24,7 @@ module Go
 
     if command == 'test' && ENV['TM_FILENAME'] =~ /(_test)?(\.go)$/
       basename = $`
+      args.push("-v")
       args.push("#{basename}.go")
       args.push("#{basename}_test.go")
       opts[:chdir] = ENV['TM_DIRECTORY']
@@ -90,13 +90,8 @@ module Go
     if err.nil? || err == ''
       puts out
     else
-      html_header("Formatting \"#{ENV['TM_FILENAME']}\"...", "go",
-                  # html_head below is used to style the error lines like those displayed when a compiler error occurs
-                  :html_head => '<style type="text/css">.err { color: red; } pre { font-style: normal; white-space: normal; }</style>')
-      puts '<pre>'
-      puts Go::link_errs(err, :err)
-      puts '</pre>'
-      html_footer
+      args << {:use_hashbang => false, :version_args => ['version'], :version_regex => /\Ago version (.*)/}
+      TextMate::Executor.run(*args)
       TextMate.exit_show_html
     end
   end
