@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>${1/^main$|(.+)/(?1:\/*
+	<string>${1/^main$|(.+)/(?1:/*
 	The $1 package implements ... bananas?
-*\/
+*/
 )/}package ${1:main}</string>
 	<key>name</key>
 	<string>Package</string>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>package ${1:`base="${TM_FILEPATH%_test.go}.go"
+if [[ -f "$base" ]] &amp;&amp; grep -q '^package ' "$base"
+	then grep -m1 '^package ' "$base"|cut -d' ' -f2
+	else echo 'main'
+fi`}
+
+import (
+	"testing"
+)
+
+func Test${2:${TM_DISPLAYNAME/^(.*?)(_test)?(\.go)?$/${1:/capitalize}/}}(t *testing.T) {
+	$0t.Fatal("no test body")
+}</string>
+	<key>name</key>
+	<string>Test</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>tabTrigger</key>
+	<string>test</string>
+	<key>uuid</key>
+	<string>C6F66AFB-B50B-45AF-B2B2-819CC3464E56</string>
+</dict>
+</plist>

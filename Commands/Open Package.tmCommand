@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
+require "shellwords"
+
+def import_path
+  if ENV.has_key? 'TM_SELECTED_TEXT'
+    ENV['TM_SELECTED_TEXT']
+  elsif ENV['TM_CURRENT_LINE'] =~ /^\s*(?:import\s+)?(?:\.|[[:alpha:]_][[:alnum:]_]*\s+)?(["`])(.*?)\1/;
+    $2
+  else
+    defaultText = %x{ /usr/bin/pbpaste -pboard find }
+    require "#{ENV['TM_SUPPORT_PATH']}/lib/ui.rb"
+    TextMate::UI.request_string :title =&gt; "Open Package", :default =&gt; defaultText, :prompt =&gt; "Which package do you wish to open?"
+  end
+end
+
+def go_path
+  env = %x{"${TM_GO:-go}" env}
+  if $? == 0
+    lcal, root = [], []
+    env.scan(/^GO(PATH|ROOT)="(.*)"/) do |key,value|
+      case key
+      when 'PATH': lcal = value.split(':').map { |dir| "#{dir}/src" }
+      when 'ROOT': root = value.split(':').map { |dir| "#{dir}/src/pkg" }
+      end
+    end
+    [ lcal, root ].flatten
+  else
+    ENV['GOPATH'].to_s.split(':').map { |dir| "#{dir}/src" }
+  end
+end
+
+def find_package_path(package)
+  go_path.each do |dir|
+    path = File.expand_path(package, dir)
+    if File.directory?(path)
+      files = Dir.entries(path).select { |file| file =~ /\.go$/ &amp;&amp; file !~ /_test\.go$/ }
+      return files.size == 1 ? File.join(path, files.first) : path
+    end
+  end
+  nil
+end
+
+if package = import_path()
+  if path = find_package_path(package)
+    %x{"$TM_MATE" #{path.shellescape}}
+  else
+    require "#{ENV['TM_SUPPORT_PATH']}/lib/exit_codes.rb"
+    TextMate.exit_show_tool_tip "Unable to locate package for import path ‘#{package}’."
+  end
+end
+</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>@D</string>
+	<key>name</key>
+	<string>Open Package</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>D3CD6B51-3A7E-4356-85F4-B76B8336BEF2</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>
