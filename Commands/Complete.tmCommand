@@ -20,7 +20,7 @@ end
 
 # byte offset of cursor position from the beginning of file
 cursor = document[ 0, ENV['TM_LINE_NUMBER'].to_i - 1].join().length + ENV['TM_LINE_INDEX'].to_i
-output = `$TM_GOCODE -f=csv -in=#{e_sh ENV['TM_FILEPATH']} autocomplete #{cursor}`
+output = `"$TM_GOCODE" -f=csv -in=#{e_sh ENV['TM_FILEPATH']} autocomplete #{cursor}`
 
 # quit if no completions found
 TextMate.exit_show_tool_tip("No completions found.") if output.length == 0
