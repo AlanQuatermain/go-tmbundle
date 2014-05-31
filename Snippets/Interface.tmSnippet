@@ -11,7 +11,7 @@
 	<key>scope</key>
 	<string>source.go</string>
 	<key>tabTrigger</key>
-	<string>int</string>
+	<string>inte</string>
 	<key>uuid</key>
 	<string>96C65CC5-19C3-4B73-A66B-F9C80B98DE54</string>
 </dict>
