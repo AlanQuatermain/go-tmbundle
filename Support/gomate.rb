@@ -25,13 +25,19 @@ module Go
     if command == 'test' && ENV['TM_FILENAME'] =~ /(_test)?(\.go)$/
       basename = $`
       args.push("-v")
-      args.push("#{basename}.go")
-      args.push("#{basename}_test.go")
+      
+      Dir.glob("#{ENV['TM_DIRECTORY']}/*.go").each do |f|        
+        args.push(f)
+      end
+      
       opts[:chdir] = ENV['TM_DIRECTORY']
     else
       # At this time, we will always run 'go' against a single file.  In the future there may be new
       # commands that will invalidate this but until then, might as well start simple.
-      args.push(ENV['TM_FILEPATH'])
+      Dir.glob("#{ENV['TM_DIRECTORY']}/*.go").each do |f|        
+        args.push(f)
+      end
+      
     end
     args.push(opts)
 
