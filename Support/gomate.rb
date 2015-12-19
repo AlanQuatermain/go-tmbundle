@@ -27,11 +27,18 @@ module Go
       args.push("-v")
       args.push("#{basename}.go")
       args.push("#{basename}_test.go")
+      # Dir.glob("#{ENV['TM_DIRECTORY']}/*.go").each do |f|
+#         args.push(f)
+#       end
       opts[:chdir] = ENV['TM_DIRECTORY']
     else
       # At this time, we will always run 'go' against a single file.  In the future there may be new
       # commands that will invalidate this but until then, might as well start simple.
+      # args.push(ENV['TM_FILEPATH'])
       args.push(ENV['TM_FILEPATH'])
+      # Dir.glob("#{ENV['TM_DIRECTORY']}/*.go").each do |f|
+#         args.push(f)
+#       end
     end
     args.push(opts)
 
@@ -77,12 +84,6 @@ module Go
 
     args = []
     args.push(gofmt_cmd)
-    args.push("-tabwidth=#{ENV['TM_TAB_SIZE']}")
-    if ENV['TM_SOFT_TABS'] && ENV['TM_SOFT_TABS'] == 'YES'
-      args.push('-tabs=false')
-    else
-      args.push('-tabs=true')
-    end
     args.push(ENV['TM_FILEPATH'])
 
     out, err = TextMate::Process.run(*args)

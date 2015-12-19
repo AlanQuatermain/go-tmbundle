@@ -5,7 +5,10 @@
 	<key>beforeRunningCommand</key>
 	<string>saveActiveFile</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby -Ku
+	<string>#!/Users/weidewang/.rvm/rubies/ruby-1.8.7-head/bin/ruby -Ku
+###!/usr/bin/env ruby -Ku
+
+
 require ENV['TM_SUPPORT_PATH'] + '/lib/ui.rb'
 require ENV['TM_SUPPORT_PATH'] + "/lib/escape.rb"
 require ENV['TM_SUPPORT_PATH'] + "/lib/tm/require_cmd.rb"
@@ -118,7 +121,7 @@ end</string>
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>~</string>
+	<string>^ </string>
 	<key>name</key>
 	<string>Complete</string>
 	<key>outputCaret</key>
