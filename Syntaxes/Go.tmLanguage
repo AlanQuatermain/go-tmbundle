@@ -766,7 +766,7 @@
                         [,;:_]?                                     # separator character (AltiVec)
                         ((-?\d+)|\*(-?\d+\$)?)?                     # minimum field width
                         (\.((-?\d+)|\*(-?\d+\$)?)?)?                # precision
-                        [diouxXDOUeEfFgGaAcCsSpnvtTbyYhHmMzZq%]      # conversion type
+                        [diouxXDOUeEfFgGaAcCsSpnvtTbyYhHmMzZqw%]    # conversion type
                     </string>
 					<key>name</key>
 					<string>constant.other.placeholder.go</string>
